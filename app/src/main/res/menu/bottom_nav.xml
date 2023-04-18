@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navBtnSearch"
+        android:icon="@drawable/icon_search_meals"
+        android:title="Search Meals" />
+    <item
+        android:id="@+id/navBtnAdd"
+        android:icon="@drawable/icon_add_meal"
+        android:title="Add Meal" />
+    <item
+        android:id="@+id/navBtnPlanner"
+        android:icon="@drawable/icon_meal_planner"
+        android:title="Meal Planner" />
+    <item
+        android:id="@+id/navBtnTags"
+        android:icon="@drawable/icon_tag_manager"
+        android:title="Tag Setup" />
+    <item
+        android:id="@+id/navBtnSettings"
+        android:icon="@drawable/icon_settings"
+        android:title="Settings" />
+
+</menu>
