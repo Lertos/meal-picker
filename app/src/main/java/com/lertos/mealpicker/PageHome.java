@@ -8,14 +8,21 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.lertos.mealpicker.databinding.LayoutPageHomeBinding;
+import com.lertos.mealpicker.model.DataManager;
 
 public class PageHome extends AppCompatActivity {
 
+    private static boolean hasStarted = false;
     private LayoutPageHomeBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!hasStarted) {
+            //Load the initial data in the DataManager class
+            DataManager.getInstance().initialLoad();
+        }
 
         binding = LayoutPageHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -24,6 +31,9 @@ public class PageHome extends AppCompatActivity {
         replaceFragment(new FragmentSearchMeal());
 
         setupBindings();
+
+        if (!hasStarted)
+            hasStarted = true;
     }
 
     private void setupBindings() {
