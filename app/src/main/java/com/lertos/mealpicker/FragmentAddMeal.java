@@ -9,7 +9,8 @@ import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
 
-import java.util.ArrayList;
+import com.lertos.mealpicker.model.DataManager;
+
 
 public class FragmentAddMeal extends Fragment {
 
@@ -30,13 +31,7 @@ public class FragmentAddMeal extends Fragment {
 
         spinnerTimeToMake = view.findViewById(R.id.spinnerTimeToMake);
 
-        ArrayList<String> timeValues = new ArrayList<>();
-
-        timeValues.add("Short");
-        timeValues.add("Medium");
-        timeValues.add("Long");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, timeValues);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, DataManager.getInstance().getTagsTimeToMake());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerTimeToMake.setAdapter(adapter);
 
