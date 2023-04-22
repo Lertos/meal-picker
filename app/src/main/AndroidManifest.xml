@@ -9,7 +9,7 @@
         android:icon="@mipmap/launcher_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MealPicker"
+        android:theme="@style/AppTheme"
         tools:targetApi="31">
 
         <activity
