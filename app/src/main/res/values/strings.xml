@@ -1,3 +1,8 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
     <string name="app_name">Meal Picker</string>
+    <string-array name="time_to_make">
+        <item>Short</item>
+        <item>Medium</item>
+        <item>Long</item>
+    </string-array>
 </resources>
