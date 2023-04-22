@@ -4,7 +4,7 @@
     <item
         android:id="@+id/navBtnSearch"
         android:icon="@drawable/icon_search_meals"
-        android:title="Search Meals" />
+        android:title="Search" />
     <item
         android:id="@+id/navBtnAdd"
         android:icon="@drawable/icon_add_meal"
@@ -12,11 +12,11 @@
     <item
         android:id="@+id/navBtnPlanner"
         android:icon="@drawable/icon_meal_planner"
-        android:title="Meal Planner" />
+        android:title="Planner" />
     <item
         android:id="@+id/navBtnTags"
         android:icon="@drawable/icon_tag_manager"
-        android:title="Tag Setup" />
+        android:title="Tags" />
     <item
         android:id="@+id/navBtnSettings"
         android:icon="@drawable/icon_settings"
