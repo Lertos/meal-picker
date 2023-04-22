@@ -13,13 +13,18 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/fontHeader"
+            style="@style/fontGigantic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:text="Add New Meal"
             android:textAlignment="center"
-            android:textAllCaps="true" />
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+
+        <View
+            style="@style/divider"
+            android:layout_marginBottom="16dp" />
 
         <TextView
             style="@style/fontMedium"
@@ -27,7 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:text="Meal Name"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etMealName"
@@ -43,7 +49,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:text="Time to Make"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinnerTimeToMake"
@@ -59,7 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:text="Difficulty"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinnerDifficulty"
@@ -75,7 +83,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:text="Meal Type"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinnerMealType"
@@ -104,7 +113,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:text="Prep Time (m)"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/etPrepTime"
@@ -128,7 +138,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:text="Cook Time (m)"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/etCookTime"
@@ -147,7 +158,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:text="Other Tags"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvOtherTagList"
