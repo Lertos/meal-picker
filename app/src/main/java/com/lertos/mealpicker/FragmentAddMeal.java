@@ -9,6 +9,8 @@ import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
+
 public class FragmentAddMeal extends Fragment {
 
     private Spinner spinnerTimeToMake;
@@ -28,7 +30,13 @@ public class FragmentAddMeal extends Fragment {
 
         spinnerTimeToMake = view.findViewById(R.id.spinnerTimeToMake);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.time_to_make, android.R.layout.simple_spinner_item);
+        ArrayList<String> timeValues = new ArrayList<>();
+
+        timeValues.add("Short");
+        timeValues.add("Medium");
+        timeValues.add("Long");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, timeValues);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerTimeToMake.setAdapter(adapter);
 
