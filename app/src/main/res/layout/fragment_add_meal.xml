@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingVertical="20dp"
     tools:context=".FragmentAddMeal">
 
     <LinearLayout
@@ -12,97 +13,135 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/fontGigantic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add a New Meal"
-            android:textAlignment="center" />
+            android:layout_marginBottom="20dp"
+            android:text="Add New Meal"
+            android:textAlignment="center"
+            android:textAllCaps="true" />
 
         <TextView
+            style="@style/fontLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
             android:text="Meal Name"
             android:textAlignment="center" />
 
         <EditText
             android:id="@+id/etMealName"
+            style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:textAlignment="textStart" />
 
         <TextView
+            style="@style/fontLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
             android:text="Time to Make"
             android:textAlignment="center" />
 
         <Spinner
             android:id="@+id/spinnerTimeToMake"
+            style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:spinnerMode="dropdown" />
 
         <TextView
+            style="@style/fontLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
             android:text="Difficulty"
             android:textAlignment="center" />
 
         <Spinner
             android:id="@+id/spinnerDifficulty"
+            style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:spinnerMode="dropdown" />
 
         <TextView
+            style="@style/fontLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
             android:text="Meal Type"
             android:textAlignment="center" />
 
         <Spinner
             android:id="@+id/spinnerMealType"
+            style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:spinnerMode="dropdown" />
 
         <TextView
+            style="@style/fontLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Prep Time"
+            android:layout_marginBottom="6dp"
+            android:text="Prep Time (mins)"
             android:textAlignment="center" />
 
         <EditText
             android:id="@+id/etPrepTime"
+            style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:textAlignment="textStart" />
 
         <TextView
+            style="@style/fontLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cook Time"
+            android:layout_marginBottom="6dp"
+            android:text="Cook Time (mins)"
             android:textAlignment="center" />
 
         <EditText
             android:id="@+id/etCookTime"
+            style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:textAlignment="textStart" />
 
         <TextView
+            style="@style/fontLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
             android:text="Other Tags"
             android:textAlignment="center" />
 
         <TextView
             android:id="@+id/tvOtherTagList"
+            style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:drawableRight="@drawable/icon_spinner_arrow"
             android:drawablePadding="16dp"
             android:hint="Select Other Tags"
             android:padding="6dp" />
+
+        <Button
+            style="@style/fontMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Create" />
 
     </LinearLayout>
 
