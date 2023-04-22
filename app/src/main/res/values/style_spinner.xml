@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Widget.App.Spinner" parent="@style/Widget.AppCompat.Spinner">
-        <item name="overlapAnchor">true</item>
-        <item name="android:background">@drawable/spinner_with_icon</item>
-        <item name="android:minHeight">24dp</item>
+
+    <style name="Widget.AppTheme.Spinner" parent="@style/Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/sel_spinner_with_icon</item>
+        <item name="android:paddingHorizontal">4dp</item>
+        <item name="android:paddingVertical">4dp</item>
+        <item name="android:minHeight">26dp</item>
     </style>
 </resources>

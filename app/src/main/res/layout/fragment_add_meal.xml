@@ -27,7 +27,6 @@
             android:id="@+id/etMealName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/editbox_background"
             android:textAlignment="textStart" />
 
         <TextView
@@ -76,7 +75,6 @@
             android:id="@+id/etPrepTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/editbox_background"
             android:textAlignment="textStart" />
 
         <TextView
@@ -89,7 +87,6 @@
             android:id="@+id/etCookTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/editbox_background"
             android:textAlignment="textStart" />
 
         <TextView
@@ -102,7 +99,6 @@
             android:id="@+id/tvOtherTagList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/editbox_background"
             android:drawableRight="@drawable/icon_spinner_arrow"
             android:drawablePadding="16dp"
             android:hint="Select Other Tags"
