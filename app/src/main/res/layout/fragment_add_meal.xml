@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingVertical="20dp"
+    android:paddingVertical="10dp"
     tools:context=".FragmentAddMeal">
 
     <LinearLayout
@@ -13,19 +13,19 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/fontGigantic"
+            style="@style/fontHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="15dp"
             android:text="Add New Meal"
             android:textAlignment="center"
             android:textAllCaps="true" />
 
         <TextView
-            style="@style/fontLarge"
+            style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
+            android:layout_marginBottom="3dp"
             android:text="Meal Name"
             android:textAlignment="center" />
 
@@ -34,14 +34,14 @@
             style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="9dp"
             android:textAlignment="textStart" />
 
         <TextView
-            style="@style/fontLarge"
+            style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
+            android:layout_marginBottom="3dp"
             android:text="Time to Make"
             android:textAlignment="center" />
 
@@ -50,14 +50,14 @@
             style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="9dp"
             android:spinnerMode="dropdown" />
 
         <TextView
-            style="@style/fontLarge"
+            style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
+            android:layout_marginBottom="3dp"
             android:text="Difficulty"
             android:textAlignment="center" />
 
@@ -66,14 +66,14 @@
             style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="9dp"
             android:spinnerMode="dropdown" />
 
         <TextView
-            style="@style/fontLarge"
+            style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
+            android:layout_marginBottom="3dp"
             android:text="Meal Type"
             android:textAlignment="center" />
 
@@ -82,14 +82,14 @@
             style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="9dp"
             android:spinnerMode="dropdown" />
 
         <TextView
-            style="@style/fontLarge"
+            style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
+            android:layout_marginBottom="3dp"
             android:text="Prep Time (mins)"
             android:textAlignment="center" />
 
@@ -98,14 +98,14 @@
             style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="9dp"
             android:textAlignment="textStart" />
 
         <TextView
-            style="@style/fontLarge"
+            style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
+            android:layout_marginBottom="3dp"
             android:text="Cook Time (mins)"
             android:textAlignment="center" />
 
@@ -114,14 +114,14 @@
             style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="9dp"
             android:textAlignment="textStart" />
 
         <TextView
-            style="@style/fontLarge"
+            style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
+            android:layout_marginBottom="3dp"
             android:text="Other Tags"
             android:textAlignment="center" />
 
@@ -130,7 +130,7 @@
             style="@style/fontMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="9dp"
             android:drawableRight="@drawable/icon_spinner_arrow"
             android:drawablePadding="16dp"
             android:hint="Select Other Tags"
