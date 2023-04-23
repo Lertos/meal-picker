@@ -1,7 +1,6 @@
 package com.lertos.mealpicker.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -19,26 +18,47 @@ public class TagManager {
         tagsDifficulty = new ArrayList<>();
         tagsMealType = new ArrayList<>();
         tagsOther = new ArrayList<>();
+
+        //TODO: Load these from a local file instead
+        tagsTimeToMake.add("Instant");
+        tagsTimeToMake.add("Short");
+        tagsTimeToMake.add("Medium");
+        tagsTimeToMake.add("Long");
+        tagsTimeToMake.add("Very Long");
+
+        tagsDifficulty.add("Easy");
+        tagsDifficulty.add("Normal");
+        tagsDifficulty.add("Hard");
+
+        tagsMealType.add("Breakfast");
+        tagsMealType.add("Lunch");
+        tagsMealType.add("Supper");
+        tagsMealType.add("Snack");
+
+        tagsOther.add("Chicken");
+        tagsOther.add("Beef");
+        tagsOther.add("Veggies");
+        tagsOther.add("Treat");
     }
 
-    public List<String> getTagsTimeToMake() {
+    public ArrayList<String> getTagsTimeToMake() {
         tagsTimeToMake.sort(Comparator.comparing(Object::toString));
-        return Collections.unmodifiableList(tagsTimeToMake);
+        return tagsTimeToMake;
     }
 
-    public List<String> getTagsDifficulty() {
+    public ArrayList<String> getTagsDifficulty() {
         tagsDifficulty.sort(Comparator.comparing(Object::toString));
-        return Collections.unmodifiableList(tagsDifficulty);
+        return tagsDifficulty;
     }
 
-    public List<String> getTagsMealType() {
+    public ArrayList<String> getTagsMealType() {
         tagsMealType.sort(Comparator.comparing(Object::toString));
-        return Collections.unmodifiableList(tagsMealType);
+        return tagsMealType;
     }
 
-    public List<String> getTagsOther() {
+    public ArrayList<String> getTagsOther() {
         tagsOther.sort(Comparator.comparing(Object::toString));
-        return Collections.unmodifiableList(tagsOther);
+        return tagsOther;
     }
 
     private boolean doesTagExist(List<String> list, String newTag) {
