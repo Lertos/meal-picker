@@ -31,7 +31,7 @@ public class FragmentAddMeal extends Fragment {
     private TextView tvOtherTagList;
     private ArrayList<Integer> tagList = new ArrayList<>();
     private boolean[] selectedTags;
-    private String[] tagOptions = {"Chicken", "Beef", "Vegetables", "Fish", "Soup", "Treat"};
+    private String[] tagOptions;
 
     public FragmentAddMeal() {
     }
@@ -66,6 +66,11 @@ public class FragmentAddMeal extends Fragment {
 
         //Setup the "other tag" dropdown list
         tvOtherTagList = view.findViewById(R.id.tvOtherTagList);
+        ArrayList<String> otherTags = DataManager.getInstance().getTags().getTagsOther();
+
+        tagOptions = new String[otherTags.size()];
+        tagOptions = otherTags.toArray(tagOptions);
+
         selectedTags = new boolean[tagOptions.length];
 
         setupOtherTagDropdownListeners();
