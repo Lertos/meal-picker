@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 
 public class FragmentAddMeal extends Fragment {
 
+    private Button btnCreateMeal;
     private Spinner spinnerTimeToMake;
     private Spinner spinnerDifficulty;
     private Spinner spinnerMealType;
@@ -47,6 +50,11 @@ public class FragmentAddMeal extends Fragment {
         setupStringSpinner(view, DataManager.getInstance().getTagsDifficulty(), spinnerDifficulty);
         setupStringSpinner(view, DataManager.getInstance().getTagsMealType(), spinnerMealType);
 
+        //Setup the button
+        btnCreateMeal = view.findViewById(R.id.btnCreateMeal);
+
+        setupCreateButtonListener();
+
         //Setup the "other tag" dropdown list
         tvOtherTagList = view.findViewById(R.id.tvOtherTagList);
         selectedTags = new boolean[tagOptions.length];
@@ -61,6 +69,23 @@ public class FragmentAddMeal extends Fragment {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerToAttachTo.setAdapter(adapter);
+    }
+
+    private void setupCreateButtonListener() {
+        btnCreateMeal.setOnClickListener((view) -> {
+            String errorMessage = validateFields();
+
+            if (!errorMessage.isEmpty()) {
+                Toast.makeText(this.getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Toast.makeText(this.getContext(), "DEBUG: Meal Created!", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private String validateFields() {
+        return "";
     }
 
     private void setupOtherTagDropdownListeners() {
