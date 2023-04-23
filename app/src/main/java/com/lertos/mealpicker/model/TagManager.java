@@ -12,11 +12,13 @@ public class TagManager {
     private ArrayList<String> tagsTimeToMake;
     private ArrayList<String> tagsDifficulty;
     private ArrayList<String> tagsMealType;
+    private ArrayList<String> tagsOther;
 
     public TagManager() {
         tagsTimeToMake = new ArrayList<>();
         tagsDifficulty = new ArrayList<>();
         tagsMealType = new ArrayList<>();
+        tagsOther = new ArrayList<>();
     }
 
     public List<String> getTagsTimeToMake() {
@@ -32,6 +34,11 @@ public class TagManager {
     public List<String> getTagsMealType() {
         tagsMealType.sort(Comparator.comparing(Object::toString));
         return Collections.unmodifiableList(tagsMealType);
+    }
+
+    public List<String> getTagsOther() {
+        tagsOther.sort(Comparator.comparing(Object::toString));
+        return Collections.unmodifiableList(tagsOther);
     }
 
     private boolean doesTagExist(List<String> list, String newTag) {
@@ -60,6 +67,10 @@ public class TagManager {
 
     public boolean addMealTypeTag(String newTag) {
         return addTagToList(tagsMealType, newTag);
+    }
+
+    public boolean addOtherTag(String newTag) {
+        return addTagToList(tagsOther, newTag);
     }
 
 }
