@@ -169,8 +169,7 @@
             android:layout_marginBottom="12dp"
             android:drawableRight="@drawable/icon_spinner_arrow"
             android:drawablePadding="16dp"
-            android:hint="Select Other Tags"
-            android:padding="6dp" />
+            android:hint="Select Other Tags" />
 
         <Button
             style="@style/fontMedium"
