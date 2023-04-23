@@ -19,6 +19,8 @@ import java.util.ArrayList;
 public class FragmentAddMeal extends Fragment {
 
     private Spinner spinnerTimeToMake;
+    private Spinner spinnerDifficulty;
+    private Spinner spinnerMealType;
     private TextView tvOtherTagList;
     private ArrayList<Integer> tagList = new ArrayList<>();
     private boolean[] selectedTags;
@@ -38,10 +40,12 @@ public class FragmentAddMeal extends Fragment {
 
         //Setup the spinners
         spinnerTimeToMake = view.findViewById(R.id.spinnerTimeToMake);
+        spinnerDifficulty = view.findViewById(R.id.spinnerDifficulty);
+        spinnerMealType = view.findViewById(R.id.spinnerMealType);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, DataManager.getInstance().getTagsTimeToMake());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        spinnerTimeToMake.setAdapter(adapter);
+        setupStringSpinner(view, DataManager.getInstance().getTagsTimeToMake(), spinnerTimeToMake);
+        setupStringSpinner(view, DataManager.getInstance().getTagsDifficulty(), spinnerDifficulty);
+        setupStringSpinner(view, DataManager.getInstance().getTagsMealType(), spinnerMealType);
 
         //Setup the "other tag" dropdown list
         tvOtherTagList = view.findViewById(R.id.tvOtherTagList);
@@ -50,6 +54,13 @@ public class FragmentAddMeal extends Fragment {
         setupOtherTagDropdownListeners();
 
         return view;
+    }
+
+    private void setupStringSpinner(View view, ArrayList<String> stringList, Spinner spinnerToAttachTo) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, stringList);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinnerToAttachTo.setAdapter(adapter);
     }
 
     private void setupOtherTagDropdownListeners() {
