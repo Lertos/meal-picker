@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,9 @@ import java.util.ArrayList;
 public class FragmentAddMeal extends Fragment {
 
     private Button btnCreateMeal;
+    private EditText etMealName;
+    private EditText etPrepTime;
+    private EditText etCookTime;
     private Spinner spinnerTimeToMake;
     private Spinner spinnerDifficulty;
     private Spinner spinnerMealType;
@@ -40,6 +44,11 @@ public class FragmentAddMeal extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_meal, container, false);
+
+        //Setup the edit texts
+        etMealName = view.findViewById(R.id.etMealName);
+        etPrepTime = view.findViewById(R.id.etPrepTime);
+        etCookTime = view.findViewById(R.id.etCookTime);
 
         //Setup the spinners
         spinnerTimeToMake = view.findViewById(R.id.spinnerTimeToMake);
@@ -85,6 +94,12 @@ public class FragmentAddMeal extends Fragment {
     }
 
     private String validateFields() {
+        if (etMealName.getEditableText().toString().isEmpty())
+            return "The Meal Name field must be entered";
+        else if (etPrepTime.getEditableText().toString().isEmpty())
+            return "The Prep Time field must be entered";
+        else if (etCookTime.getEditableText().toString().isEmpty())
+            return "The Cook Time field must be entered";
         return "";
     }
 
