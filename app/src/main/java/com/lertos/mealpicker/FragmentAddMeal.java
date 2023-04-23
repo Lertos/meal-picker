@@ -55,9 +55,9 @@ public class FragmentAddMeal extends Fragment {
         spinnerDifficulty = view.findViewById(R.id.spinnerDifficulty);
         spinnerMealType = view.findViewById(R.id.spinnerMealType);
 
-        setupStringSpinner(view, DataManager.getInstance().getTagsTimeToMake(), spinnerTimeToMake);
-        setupStringSpinner(view, DataManager.getInstance().getTagsDifficulty(), spinnerDifficulty);
-        setupStringSpinner(view, DataManager.getInstance().getTagsMealType(), spinnerMealType);
+        setupStringSpinner(view, DataManager.getInstance().getTags().getTagsTimeToMake(), spinnerTimeToMake);
+        setupStringSpinner(view, DataManager.getInstance().getTags().getTagsDifficulty(), spinnerDifficulty);
+        setupStringSpinner(view, DataManager.getInstance().getTags().getTagsMealType(), spinnerMealType);
 
         //Setup the button
         btnCreateMeal = view.findViewById(R.id.btnCreateMeal);

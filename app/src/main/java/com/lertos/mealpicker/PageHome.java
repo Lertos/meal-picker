@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.lertos.mealpicker.databinding.LayoutPageHomeBinding;
-import com.lertos.mealpicker.model.DataManager;
 
 public class PageHome extends AppCompatActivity {
 
@@ -20,8 +19,7 @@ public class PageHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         if (!hasStarted) {
-            //Load the initial data in the DataManager class
-            DataManager.getInstance().initialLoad();
+            //Adding for future use
         }
 
         binding = LayoutPageHomeBinding.inflate(getLayoutInflater());
