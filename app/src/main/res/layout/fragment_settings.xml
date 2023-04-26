@@ -25,6 +25,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
+        <TextView
+            style="@style/fontLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TODO: Timings shown as '250 min' vs. '4 hrs 10 mins'"
+            android:textAlignment="center" />
+
     </LinearLayout>
 
 </FrameLayout>
