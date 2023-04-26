@@ -17,11 +17,18 @@ public class Timing {
     }
 
     public String getDisplayTimeBasedOnSetting() {
-        return "";
+        //TODO: Need to check the setting for how the time should be displayed once it's implemented on Settings page
+        return getDisplayTimeInMinutes();
     }
 
     public String getDisplayTimeInMinutes() {
-        return "";
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(timeInMinutes);
+        sb.append(" ");
+        sb.append("mins");
+
+        return sb.toString();
     }
 
     public String getDisplayTimeInHoursAndMinutes() {
