@@ -3,8 +3,8 @@ package com.lertos.mealpicker.model;
 public class Meal {
 
     private String title;
-    private int prepTime;
-    private int cookTime;
+    private Timing prepTime;
+    private Timing cookTime;
     private String tagTimeToMake;
     private String tagDifficulty;
     private String tagMealType;
@@ -12,8 +12,8 @@ public class Meal {
 
     public Meal(String title, int prepTime, int cookTime, String tagTimeToMake, String tagDifficulty, String tagMealType, String[] otherTags) {
         this.title = title;
-        this.prepTime = prepTime;
-        this.cookTime = cookTime;
+        this.prepTime = new Timing(prepTime);
+        this.cookTime = new Timing(cookTime);
         this.tagTimeToMake = tagTimeToMake;
         this.tagDifficulty = tagDifficulty;
         this.tagMealType = tagMealType;
@@ -28,20 +28,20 @@ public class Meal {
         this.title = title;
     }
 
-    public int getPrepTime() {
+    public Timing getPrepTime() {
         return prepTime;
     }
 
     public void setPrepTime(int prepTime) {
-        this.prepTime = prepTime;
+        this.prepTime.setTimeInMinutes(prepTime);
     }
 
-    public int getCookTime() {
+    public Timing getCookTime() {
         return cookTime;
     }
 
     public void setCookTime(int cookTime) {
-        this.cookTime = cookTime;
+        this.prepTime.setTimeInMinutes(cookTime);
     }
 
     public String getTagTimeToMake() {
