@@ -26,4 +26,14 @@ public class MealManager {
         return true;
     }
 
+    public boolean removeMeal(String title) {
+        for (Meal meal : mealList) {
+            if (meal.getTitle().equalsIgnoreCase(title)) {
+                mealList.remove(meal);
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
