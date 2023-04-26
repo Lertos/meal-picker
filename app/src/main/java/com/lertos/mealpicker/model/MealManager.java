@@ -1,6 +1,8 @@
 package com.lertos.mealpicker.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MealManager {
 
@@ -34,6 +36,15 @@ public class MealManager {
             }
         }
         return true;
+    }
+
+    public List<Meal> getMeals() {
+        return mealList;
+    }
+
+    public List<Meal> getSortedMeals() {
+        Collections.sort(mealList);
+        return mealList;
     }
 
 }
