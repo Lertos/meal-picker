@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.lertos.mealpicker.databinding.LayoutPageHomeBinding;
+import com.lertos.mealpicker.model.DataManager;
 
 public class PageHome extends AppCompatActivity {
 
@@ -26,7 +27,12 @@ public class PageHome extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         //Set the initial screen
-        replaceFragment(new FragmentSearchMeal());
+        if (DataManager.getInstance().hasChangedDayNightTheme()) {
+            DataManager.getInstance().setChangedDayNightTheme(false);
+            replaceFragment(new FragmentSettings());
+        } else {
+            replaceFragment(new FragmentSearchMeal());
+        }
 
         setupBindings();
 
