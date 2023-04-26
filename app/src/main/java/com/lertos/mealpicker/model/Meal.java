@@ -1,6 +1,6 @@
 package com.lertos.mealpicker.model;
 
-public class Meal {
+public class Meal implements Comparable<Meal> {
 
     private String title;
     private Timing prepTime;
@@ -74,5 +74,10 @@ public class Meal {
 
     public void setOtherTags(String[] otherTags) {
         this.otherTags = otherTags;
+    }
+
+    @Override
+    public int compareTo(Meal meal) {
+        return this.getTitle().compareTo(meal.getTitle());
     }
 }
