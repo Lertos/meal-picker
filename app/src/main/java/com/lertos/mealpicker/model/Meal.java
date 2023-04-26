@@ -1,5 +1,7 @@
 package com.lertos.mealpicker.model;
 
+import java.util.Arrays;
+
 public class Meal implements Comparable<Meal> {
 
     private String title;
@@ -79,5 +81,16 @@ public class Meal implements Comparable<Meal> {
     @Override
     public int compareTo(Meal meal) {
         return this.getTitle().compareTo(meal.getTitle());
+    }
+
+    @Override
+    public String toString() {
+        return '\n' + "title= " + title + '\n' +
+                ", prepTime= " + prepTime.getDisplayTimeInMinutes() + '\n' +
+                ", cookTime= " + cookTime.getDisplayTimeInMinutes() + '\n' +
+                ", tagTimeToMake= " + tagTimeToMake + '\n' +
+                ", tagDifficulty= " + tagDifficulty + '\n' +
+                ", tagMealType= " + tagMealType + '\n' +
+                ", otherTags= " + Arrays.toString(otherTags) + "\n\n";
     }
 }
