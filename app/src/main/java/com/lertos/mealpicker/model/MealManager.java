@@ -8,7 +8,7 @@ public class MealManager {
 
     private ArrayList<Meal> mealList;
 
-    public MealManager(ArrayList<Meal> mealList) {
+    public MealManager() {
         this.mealList = new ArrayList<>();
 
         loadSavedMeals();
@@ -46,5 +46,7 @@ public class MealManager {
         Collections.sort(mealList);
         return mealList;
     }
+
+    //TODO: Need to provide a lookup that satisfies all search filters
 
 }
