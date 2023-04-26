@@ -42,17 +42,14 @@ public class TagManager {
     }
 
     public ArrayList<String> getTagsTimeToMake() {
-        tagsTimeToMake.sort(Comparator.comparing(Object::toString));
         return tagsTimeToMake;
     }
 
     public ArrayList<String> getTagsDifficulty() {
-        tagsDifficulty.sort(Comparator.comparing(Object::toString));
         return tagsDifficulty;
     }
 
     public ArrayList<String> getTagsMealType() {
-        tagsMealType.sort(Comparator.comparing(Object::toString));
         return tagsMealType;
     }
 
