@@ -4,6 +4,7 @@ public class DataManager {
 
     public static DataManager instance;
     private TagManager tagManager = new TagManager();
+    private MealManager mealManager = new MealManager();
     //This setting is to reload the settings page since the activity restarts after switching themes; yuck!
     private boolean changedDayNightTheme = false;
 
@@ -18,6 +19,10 @@ public class DataManager {
 
     public TagManager getTags() {
         return tagManager;
+    }
+
+    public MealManager getMeals() {
+        return mealManager;
     }
 
     public boolean hasChangedDayNightTheme() {
