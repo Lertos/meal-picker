@@ -32,6 +32,23 @@ public class Timing {
     }
 
     public String getDisplayTimeInHoursAndMinutes() {
-        return "";
+        StringBuilder sb = new StringBuilder();
+
+        int minutes = timeInMinutes;
+        int hours = (int) Math.floor(timeInMinutes / 60);
+
+        minutes = minutes - (hours * 60);
+
+        if (hours > 0) {
+            sb.append(hours);
+            sb.append(" ");
+            sb.append("hrs");
+        }
+
+        sb.append(minutes);
+        sb.append(" ");
+        sb.append("mins");
+
+        return sb.toString();
     }
 }
