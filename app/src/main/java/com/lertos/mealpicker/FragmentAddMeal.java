@@ -1,6 +1,7 @@
 package com.lertos.mealpicker;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.lertos.mealpicker.model.DataManager;
+import com.lertos.mealpicker.model.Meal;
 
 import java.util.ArrayList;
 
@@ -94,7 +96,26 @@ public class FragmentAddMeal extends Fragment {
                 return;
             }
 
-            Toast.makeText(this.getContext(), "DEBUG: Meal Created!", Toast.LENGTH_SHORT).show();
+            //TODO: Put this in it's own method such as createMeal()
+            String mealTitle = etMealName.getEditableText().toString();
+            int prepTime = Integer.parseInt(etPrepTime.getEditableText().toString());
+            int cookTime = Integer.parseInt(etCookTime.getEditableText().toString());
+
+            String tagTimeToMake = spinnerTimeToMake.getSelectedItem().toString();
+            String tagDifficulty = spinnerDifficulty.getSelectedItem().toString();
+            String tagMealType = spinnerMealType.getSelectedItem().toString();
+
+            //TODO: Get the other tag list properly; just debugging for now as that requires a lot more logic
+            Meal newMeal = new Meal(mealTitle, prepTime, cookTime, tagTimeToMake, tagDifficulty, tagMealType, new String[0]);
+
+            boolean wasAdded = DataManager.getInstance().getMeals().addMeal(newMeal);
+
+            Log.d("==Meals", DataManager.getInstance().getMeals().getMeals().toString());
+
+            if (wasAdded)
+                Toast.makeText(this.getContext(), "A new meal has been created!", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this.getContext(), "That meal title already exists", Toast.LENGTH_SHORT).show();
         });
     }
 
