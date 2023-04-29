@@ -32,7 +32,30 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //Set onClick listeners
+        holder.ibBtnEdit.setOnClickListener(view -> {
+            holder.etTagName.setEnabled(true);
+
+            holder.ibBtnEdit.setVisibility(View.GONE);
+            holder.ibBtnConfirm.setVisibility(View.VISIBLE);
+            holder.ibBtnCancel.setVisibility(View.VISIBLE);
+        });
+
+        holder.ibBtnConfirm.setOnClickListener(view -> {
+            holder.etTagName.setEnabled(false);
+
+            holder.ibBtnEdit.setVisibility(View.VISIBLE);
+            holder.ibBtnConfirm.setVisibility(View.GONE);
+            holder.ibBtnCancel.setVisibility(View.GONE);
+        });
+
+        holder.ibBtnCancel.setOnClickListener(view -> {
+            holder.etTagName.setEnabled(false);
+
+            holder.ibBtnEdit.setVisibility(View.VISIBLE);
+            holder.ibBtnConfirm.setVisibility(View.GONE);
+            holder.ibBtnCancel.setVisibility(View.GONE);
+            holder.ibBtnCancel.setVisibility(View.GONE);
+        });
     }
 
     @Override
@@ -43,6 +66,8 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageButton ibBtnEdit;
+        private final ImageButton ibBtnConfirm;
+        private final ImageButton ibBtnCancel;
         private final ImageButton ibBtnDelete;
         private final EditText etTagName;
 
@@ -50,6 +75,8 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
             super(itemView);
 
             ibBtnEdit = itemView.findViewById(R.id.ibBtnEdit);
+            ibBtnConfirm = itemView.findViewById(R.id.ibBtnConfirm);
+            ibBtnCancel = itemView.findViewById(R.id.ibBtnCancel);
             ibBtnDelete = itemView.findViewById(R.id.ibBtnDelete);
             etTagName = itemView.findViewById(R.id.etTagName);
         }
