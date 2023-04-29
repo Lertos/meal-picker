@@ -66,28 +66,12 @@ public class TagManager {
         return false;
     }
 
-    private boolean addTagToList(List<String> list, String newTag) {
+    public boolean addTagToList(List<String> list, String newTag) {
         if (!doesTagExist(list, newTag)) {
             list.add(newTag);
             return true;
         }
         return false;
-    }
-
-    public boolean addTimeToMakeTag(String newTag) {
-        return addTagToList(tagsTimeToMake, newTag);
-    }
-
-    public boolean addDifficultyTag(String newTag) {
-        return addTagToList(tagsDifficulty, newTag);
-    }
-
-    public boolean addMealTypeTag(String newTag) {
-        return addTagToList(tagsMealType, newTag);
-    }
-
-    public boolean addOtherTag(String newTag) {
-        return addTagToList(tagsOther, newTag);
     }
 
 }
