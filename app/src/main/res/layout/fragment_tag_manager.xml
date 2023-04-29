@@ -44,6 +44,7 @@
         android:id="@+id/rvTagsTimeToMake"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/divider"
         android:layout_below="@+id/tabLayout">
 
     </androidx.recyclerview.widget.RecyclerView>
