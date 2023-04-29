@@ -32,30 +32,37 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.ibBtnEdit.setOnClickListener(view -> {
-            holder.etTagName.setEnabled(true);
+        holder.etTagName.getEditableText().clear();
+        holder.etTagName.getEditableText().append(tagList.get(position));
 
-            holder.ibBtnEdit.setVisibility(View.GONE);
-            holder.ibBtnConfirm.setVisibility(View.VISIBLE);
-            holder.ibBtnCancel.setVisibility(View.VISIBLE);
+        //TODO: When a tag is enabled, set some field like "activeTagPosition". Then when you move tabs, disable it before you switch data sets
+        holder.ibBtnEdit.setOnClickListener(view -> {
+            enableTextField(holder);
         });
 
         holder.ibBtnConfirm.setOnClickListener(view -> {
-            holder.etTagName.setEnabled(false);
-
-            holder.ibBtnEdit.setVisibility(View.VISIBLE);
-            holder.ibBtnConfirm.setVisibility(View.GONE);
-            holder.ibBtnCancel.setVisibility(View.GONE);
+            disableTextField(holder);
         });
 
         holder.ibBtnCancel.setOnClickListener(view -> {
-            holder.etTagName.setEnabled(false);
-
-            holder.ibBtnEdit.setVisibility(View.VISIBLE);
-            holder.ibBtnConfirm.setVisibility(View.GONE);
-            holder.ibBtnCancel.setVisibility(View.GONE);
-            holder.ibBtnCancel.setVisibility(View.GONE);
+            disableTextField(holder);
         });
+    }
+
+    private void enableTextField(ViewHolder holder) {
+        holder.etTagName.setEnabled(true);
+
+        holder.ibBtnEdit.setVisibility(View.GONE);
+        holder.ibBtnConfirm.setVisibility(View.VISIBLE);
+        holder.ibBtnCancel.setVisibility(View.VISIBLE);
+    }
+
+    private void disableTextField(ViewHolder holder) {
+        holder.etTagName.setEnabled(false);
+
+        holder.ibBtnEdit.setVisibility(View.VISIBLE);
+        holder.ibBtnConfirm.setVisibility(View.GONE);
+        holder.ibBtnCancel.setVisibility(View.GONE);
     }
 
     @Override
