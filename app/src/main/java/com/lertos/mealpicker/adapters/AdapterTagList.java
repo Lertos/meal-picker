@@ -32,10 +32,15 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //Set the tag text using the list passed to the adapter
         holder.etTagName.getEditableText().clear();
         holder.etTagName.getEditableText().append(tagList.get(position));
 
-        //TODO: When a tag is enabled, set some field like "activeTagPosition". Then when you move tabs, disable it before you switch data sets
+        //TODO: Check if this is needed when you have the tab switching working
+        //Disable any open fields; useful when switching tabs
+        if (holder.etTagName.isEnabled())
+            disableTextField(holder);
+
         holder.ibBtnEdit.setOnClickListener(view -> {
             enableTextField(holder);
         });
