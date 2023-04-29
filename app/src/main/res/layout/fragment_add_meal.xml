@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:maxLength="80"
+            android:maxLines="1"
             android:textAlignment="textStart" />
 
         <TextView
@@ -160,7 +161,8 @@
             android:layout_marginBottom="24dp"
             android:drawableRight="@drawable/icon_spinner_arrow"
             android:drawablePadding="16dp"
-            android:hint="Select Other Tags" />
+            android:hint="Select Other Tags"
+            android:maxLines="1" />
 
         <View
             style="@style/divider"
