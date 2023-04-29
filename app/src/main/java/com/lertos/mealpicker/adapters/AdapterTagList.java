@@ -4,7 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,15 +42,15 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final ImageView ivBtnEdit;
-        private final ImageView ivBtnDelete;
+        private final ImageButton ibBtnEdit;
+        private final ImageButton ibBtnDelete;
         private final EditText etTagName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ivBtnEdit = itemView.findViewById(R.id.ivBtnEdit);
-            ivBtnDelete = itemView.findViewById(R.id.ivBtnDelete);
+            ibBtnEdit = itemView.findViewById(R.id.ibBtnEdit);
+            ibBtnDelete = itemView.findViewById(R.id.ibBtnDelete);
             etTagName = itemView.findViewById(R.id.etTagName);
         }
     }
