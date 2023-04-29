@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,13 +16,17 @@ import com.google.android.material.tabs.TabLayout;
 import com.lertos.mealpicker.adapters.AdapterTagList;
 import com.lertos.mealpicker.model.DataManager;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class FragmentTagManager extends Fragment {
 
     private View view;
     private TabLayout tabLayout;
     private RecyclerView recyclerView;
+    private AdapterTagList adapterTagList;
+    private EditText etNewTag;
+    private ImageButton ibBtnAdd;
+    private ArrayList<String> currentTagList;
 
     public FragmentTagManager() {
     }
@@ -35,9 +42,14 @@ public class FragmentTagManager extends Fragment {
 
         tabLayout = view.findViewById(R.id.tabLayout);
         recyclerView = view.findViewById(R.id.rvTagsTimeToMake);
+        etNewTag = view.findViewById(R.id.etNewTag);
+        ibBtnAdd = view.findViewById(R.id.ibBtnAdd);
+
+        currentTagList = DataManager.getInstance().getTags().getTagsTimeToMake();
 
         addTabLayoutListener();
-        setListToRecyclerView(DataManager.getInstance().getTags().getTagsTimeToMake());
+        setListToRecyclerView();
+        addNewTagButtonListener();
 
         return view;
     }
@@ -48,18 +60,19 @@ public class FragmentTagManager extends Fragment {
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0:
-                        setListToRecyclerView(DataManager.getInstance().getTags().getTagsTimeToMake());
+                        currentTagList = DataManager.getInstance().getTags().getTagsTimeToMake();
                         break;
                     case 1:
-                        setListToRecyclerView(DataManager.getInstance().getTags().getTagsDifficulty());
+                        currentTagList = DataManager.getInstance().getTags().getTagsDifficulty();
                         break;
                     case 2:
-                        setListToRecyclerView(DataManager.getInstance().getTags().getTagsMealType());
+                        currentTagList = DataManager.getInstance().getTags().getTagsMealType();
                         break;
                     case 3:
-                        setListToRecyclerView(DataManager.getInstance().getTags().getTagsOther());
+                        currentTagList = DataManager.getInstance().getTags().getTagsOther();
                         break;
                 }
+                setListToRecyclerView();
             }
 
             @Override
@@ -72,11 +85,32 @@ public class FragmentTagManager extends Fragment {
         });
     }
 
-    private void setListToRecyclerView(List<String> list) {
-        AdapterTagList adapterTagList = new AdapterTagList();
-        adapterTagList.setDataList(list);
+    private void setListToRecyclerView() {
+        adapterTagList = new AdapterTagList();
+        adapterTagList.setDataList(currentTagList);
 
         recyclerView.setAdapter(adapterTagList);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+    }
+
+    private void addNewTagButtonListener() {
+        ibBtnAdd.setOnClickListener(btn -> {
+            String newTag = etNewTag.getEditableText().toString();
+
+            if (newTag.isEmpty()) {
+                Toast.makeText(view.getContext(), "Your new tag cannot be empty", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (!DataManager.getInstance().getTags().addTagToList(currentTagList, newTag)) {
+                Toast.makeText(view.getContext(), "That tag already exists in the current list", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            //Update the adapter list so the new tag will show up
+            adapterTagList.notifyDataSetChanged();
+
+            //Make sure the new tag field is empty after adding a tag
+            etNewTag.getEditableText().clear();
+        });
     }
 }
