@@ -36,11 +36,6 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
         holder.etTagName.getEditableText().clear();
         holder.etTagName.getEditableText().append(tagList.get(position));
 
-        //TODO: Check if this is needed when you have the tab switching working
-        //Disable any open fields; useful when switching tabs
-        if (holder.etTagName.isEnabled())
-            disableTextField(holder);
-
         holder.ibBtnEdit.setOnClickListener(view -> {
             enableTextField(holder);
         });
