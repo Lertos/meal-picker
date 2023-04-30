@@ -19,6 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHolder> {
 
+    private int currentActivePos = -1;
     private List<String> tagList = new ArrayList<>();
     private Map<Integer, String> previousValueMap;
 
@@ -39,21 +40,27 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Set the tag text using the list passed to the adapter
         holder.etTagName.getEditableText().clear();
-        holder.etTagName.getEditableText().append(tagList.get(position));
+        holder.etTagName.getEditableText().append(tagList.get(holder.getAdapterPosition()));
 
-        holder.ibBtnEdit.setOnClickListener(view -> {
+        //Disable all text fields other than the currently desired row
+        if (currentActivePos != holder.getAdapterPosition())
+            disableTextField(holder);
+        else
             enableTextField(holder);
 
+        holder.ibBtnEdit.setOnClickListener(view -> {
             //Add the previous value in the map so we can restore it if needed
             previousValueMap.put(position, holder.etTagName.getEditableText().toString());
+            currentActivePos = holder.getAdapterPosition();
+            notifyDataSetChanged();
         });
 
         holder.ibBtnConfirm.setOnClickListener(view -> {
             disableTextField(holder);
 
             //Set the tag to the new text and remove it from the previous value list
-            tagList.set(position, holder.etTagName.getEditableText().toString());
-            previousValueMap.remove(position);
+            tagList.set(holder.getAdapterPosition(), holder.etTagName.getEditableText().toString());
+            previousValueMap.remove(holder.getAdapterPosition());
         });
 
         holder.ibBtnCancel.setOnClickListener(view -> {
@@ -61,23 +68,24 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
 
             //Set the tag back to the previous text and remove it from the previous value list
             holder.etTagName.getEditableText().clear();
-            holder.etTagName.getEditableText().append(previousValueMap.get(position));
+            holder.etTagName.getEditableText().append(previousValueMap.get(holder.getAdapterPosition()));
         });
 
         holder.ibBtnDelete.setOnClickListener(view -> {
-            tagList.remove(position);
-            previousValueMap.remove(position);
+            tagList.remove(holder.getAdapterPosition());
+            previousValueMap.remove(holder.getAdapterPosition());
 
             Iterator<Map.Entry<Integer, String>> itr = previousValueMap.entrySet().iterator();
 
             while (itr.hasNext()) {
                 Map.Entry<Integer, String> entry = itr.next();
 
-                if (entry.getKey() >= position) {
+                if (entry.getKey() >= holder.getAdapterPosition()) {
                     previousValueMap.put(entry.getKey() - 1, entry.getValue());
                     itr.remove();
                 }
             }
+            currentActivePos = -1;
             notifyDataSetChanged();
         });
     }
