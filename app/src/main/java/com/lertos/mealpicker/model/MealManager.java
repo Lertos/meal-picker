@@ -11,6 +11,13 @@ public class MealManager {
     public MealManager() {
         this.mealList = new ArrayList<>();
 
+        //TODO: Debug meals
+        Meal meal1 = new Meal("Burger Pasta", 30, 120, "Long", "Hard", "Supper", new String[]{"Pasta", "Beef"});
+        Meal meal2 = new Meal("Pizza Salad", 15, 5, "Short", "Easy", "Lunch", new String[]{"Salad", "Beef", "Veggies"});
+
+        mealList.add(meal1);
+        mealList.add(meal2);
+
         loadSavedMeals();
     }
 
