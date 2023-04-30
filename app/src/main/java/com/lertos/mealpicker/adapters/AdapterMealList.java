@@ -4,22 +4,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lertos.mealpicker.R;
+import com.lertos.mealpicker.model.Meal;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterMealList extends RecyclerView.Adapter<AdapterMealList.ViewHolder> {
 
-    private List<String> mealList = new ArrayList<>();
+    private List<Meal> mealList = new ArrayList<>();
 
-    public void setDataList(List<String> list) {
+    public void setDataList(List<Meal> list) {
         mealList = list;
         notifyDataSetChanged();
     }
@@ -33,6 +34,8 @@ public class AdapterMealList extends RecyclerView.Adapter<AdapterMealList.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.etMealName.setText(mealList.get(position).getTitle());
+
         holder.ibBtnDelete.setOnClickListener(view -> {
             mealList.remove(holder.getAdapterPosition());
             notifyDataSetChanged();
@@ -53,7 +56,7 @@ public class AdapterMealList extends RecyclerView.Adapter<AdapterMealList.ViewHo
 
         private final ImageButton ibBtnDelete;
         private final ImageButton ibBtnChoose;
-        private final EditText etMealName;
+        private final TextView etMealName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
