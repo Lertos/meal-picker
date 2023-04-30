@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.lertos.mealpicker.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHolder> {
 
@@ -23,7 +24,7 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
 
     public void setDataList(List<String> list) {
         tagList = list;
-        previousValueMap = new HashMap<>();
+        previousValueMap = new ConcurrentHashMap<>();
         notifyDataSetChanged();
     }
 
@@ -63,7 +64,22 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
             holder.etTagName.getEditableText().append(previousValueMap.get(position));
         });
 
-        //TODO: When a deletion occurs, check if it's in the list; if so - delete it and shift other positions above it
+        holder.ibBtnDelete.setOnClickListener(view -> {
+            tagList.remove(position);
+            previousValueMap.remove(position);
+
+            Iterator<Map.Entry<Integer, String>> itr = previousValueMap.entrySet().iterator();
+
+            while (itr.hasNext()) {
+                Map.Entry<Integer, String> entry = itr.next();
+
+                if (entry.getKey() >= position) {
+                    previousValueMap.put(entry.getKey() - 1, entry.getValue());
+                    itr.remove();
+                }
+            }
+            notifyDataSetChanged();
+        });
     }
 
     private void enableTextField(ViewHolder holder) {
