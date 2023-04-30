@@ -52,17 +52,15 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
         });
 
         holder.ibBtnConfirm.setOnClickListener(view -> {
-            disableTextField(holder);
-
-            //Set the tag to the new text and remove it from the previous value list
+            //Set the tag to the new text
             tagList.set(holder.getAdapterPosition(), holder.etTagName.getEditableText().toString());
+            disableTextField(holder);
         });
 
         holder.ibBtnCancel.setOnClickListener(view -> {
-            disableTextField(holder);
-
-            //Set the tag back to the previous text and remove it from the previous value list
+            //Set the tag back to the previous text
             holder.etTagName.getEditableText().clear();
+            disableTextField(holder);
         });
 
         holder.ibBtnDelete.setOnClickListener(view -> {
