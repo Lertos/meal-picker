@@ -60,6 +60,7 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
         holder.ibBtnCancel.setOnClickListener(view -> {
             //Set the tag back to the previous text
             holder.etTagName.getEditableText().clear();
+            holder.etTagName.getEditableText().append(previousTagValue);
             disableTextField(holder);
         });
 
