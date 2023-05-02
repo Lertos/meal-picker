@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
@@ -26,9 +27,11 @@ public class FragmentSearchMeal extends Fragment {
     private AdapterMealList adapterMealList;
     private Button btnHideFilters;
     private Button btnShowFilters;
+    private Button btnFilter;
     private Spinner spinnerTimeToMake;
     private Spinner spinnerDifficulty;
     private Spinner spinnerMealType;
+    private EditText etMealName;
 
     public FragmentSearchMeal() {
     }
@@ -43,10 +46,15 @@ public class FragmentSearchMeal extends Fragment {
         view = inflater.inflate(R.layout.fragment_search_meal, container, false);
 
         recyclerView = view.findViewById(R.id.rvMealList);
+
+        etMealName = view.findViewById(R.id.etMealName);
+
+        //Set up the buttons
         btnHideFilters = view.findViewById(R.id.btnHideFilters);
         btnShowFilters = view.findViewById(R.id.btnShowFilters);
+        btnFilter = view.findViewById(R.id.btnFilter);
 
-        //Setup the spinners
+        //Set up the spinners
         spinnerTimeToMake = view.findViewById(R.id.spinnerTimeToMake);
         spinnerDifficulty = view.findViewById(R.id.spinnerDifficulty);
         spinnerMealType = view.findViewById(R.id.spinnerMealType);
@@ -56,6 +64,7 @@ public class FragmentSearchMeal extends Fragment {
         setupStringSpinner(view, DataManager.getInstance().getTags().getTagsMealType(), spinnerMealType);
 
         addFilterSectionToggleListeners();
+        addFilterButtonListener();
 
         //TODO: Get a filtered list from the MealManager
         setAdapterMealList(DataManager.getInstance().getMeals().getMeals());
@@ -90,6 +99,20 @@ public class FragmentSearchMeal extends Fragment {
         btnShowFilters.setOnClickListener(btn -> {
             view.findViewById(R.id.linSearchFilters).setVisibility(View.VISIBLE);
             view.findViewById(R.id.btnShowFilters).setVisibility(View.GONE);
+        });
+    }
+
+    private void addFilterButtonListener() {
+        btnFilter.setOnClickListener(btn -> {
+            String mealTitle = etMealName.getEditableText().toString();
+            String tagTimeToMake = spinnerTimeToMake.getSelectedItem().toString();
+            String tagDifficulty = spinnerDifficulty.getSelectedItem().toString();
+            String tagMealType = spinnerMealType.getSelectedItem().toString();
+            //TODO: Get the other tag list properly; just debugging for now as that requires a lot more logic
+
+            //Check isEmpty for the "no selection" option
+            if (!tagTimeToMake.isEmpty()) {
+            }
         });
     }
 }
