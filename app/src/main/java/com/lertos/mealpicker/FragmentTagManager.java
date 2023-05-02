@@ -111,6 +111,8 @@ public class FragmentTagManager extends Fragment {
 
             //Make sure the new tag field is empty after adding a tag
             etNewTag.getEditableText().clear();
+
+            //TODO: Could add a setting in the settings page to say "close keyboard on new tag add" and use Helper.closeKeyboard(getActivity())
         });
     }
 }
