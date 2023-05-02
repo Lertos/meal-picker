@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +21,8 @@ public class FragmentSearchMeal extends Fragment {
     private View view;
     private RecyclerView recyclerView;
     private AdapterMealList adapterMealList;
+    private Button btnHideFilters;
+    private Button btnShowFilters;
 
     public FragmentSearchMeal() {
     }
@@ -34,6 +37,10 @@ public class FragmentSearchMeal extends Fragment {
         view = inflater.inflate(R.layout.fragment_search_meal, container, false);
 
         recyclerView = view.findViewById(R.id.rvMealList);
+        btnHideFilters = view.findViewById(R.id.btnHideFilters);
+        btnShowFilters = view.findViewById(R.id.btnShowFilters);
+
+        addFilterSectionToggleListeners();
 
         //TODO: Get a filtered list from the MealManager
         setAdapterMealList(DataManager.getInstance().getMeals().getMeals());
@@ -47,5 +54,17 @@ public class FragmentSearchMeal extends Fragment {
 
         recyclerView.setAdapter(adapterMealList);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+    }
+
+    private void addFilterSectionToggleListeners() {
+        btnHideFilters.setOnClickListener(btn -> {
+            view.findViewById(R.id.linSearchFilters).setVisibility(View.GONE);
+            view.findViewById(R.id.btnShowFilters).setVisibility(View.VISIBLE);
+        });
+
+        btnShowFilters.setOnClickListener(btn -> {
+            view.findViewById(R.id.linSearchFilters).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.btnShowFilters).setVisibility(View.GONE);
+        });
     }
 }
