@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +16,7 @@ import com.lertos.mealpicker.adapters.AdapterMealList;
 import com.lertos.mealpicker.model.DataManager;
 import com.lertos.mealpicker.model.Meal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentSearchMeal extends Fragment {
@@ -23,6 +26,9 @@ public class FragmentSearchMeal extends Fragment {
     private AdapterMealList adapterMealList;
     private Button btnHideFilters;
     private Button btnShowFilters;
+    private Spinner spinnerTimeToMake;
+    private Spinner spinnerDifficulty;
+    private Spinner spinnerMealType;
 
     public FragmentSearchMeal() {
     }
@@ -40,12 +46,31 @@ public class FragmentSearchMeal extends Fragment {
         btnHideFilters = view.findViewById(R.id.btnHideFilters);
         btnShowFilters = view.findViewById(R.id.btnShowFilters);
 
+        //Setup the spinners
+        spinnerTimeToMake = view.findViewById(R.id.spinnerTimeToMake);
+        spinnerDifficulty = view.findViewById(R.id.spinnerDifficulty);
+        spinnerMealType = view.findViewById(R.id.spinnerMealType);
+
+        setupStringSpinner(view, DataManager.getInstance().getTags().getTagsTimeToMake(), spinnerTimeToMake);
+        setupStringSpinner(view, DataManager.getInstance().getTags().getTagsDifficulty(), spinnerDifficulty);
+        setupStringSpinner(view, DataManager.getInstance().getTags().getTagsMealType(), spinnerMealType);
+
         addFilterSectionToggleListeners();
 
         //TODO: Get a filtered list from the MealManager
         setAdapterMealList(DataManager.getInstance().getMeals().getMeals());
 
         return view;
+    }
+
+    private void setupStringSpinner(View view, ArrayList<String> stringList, Spinner spinnerToAttachTo) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, stringList);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinnerToAttachTo.setAdapter(adapter);
+
+        //To allow them to select "nothing"
+        adapter.insert("", 0);
     }
 
     private void setAdapterMealList(List<Meal> mealList) {
