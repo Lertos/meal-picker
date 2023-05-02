@@ -110,9 +110,11 @@ public class FragmentSearchMeal extends Fragment {
             String tagMealType = spinnerMealType.getSelectedItem().toString();
             //TODO: Get the other tag list properly; just debugging for now as that requires a lot more logic
 
-            //Check isEmpty for the "no selection" option
-            if (!tagTimeToMake.isEmpty()) {
-            }
+            //Get the list of meals based on search filters
+            List<Meal> filteredMeals = DataManager.getInstance().getMeals().getFilteredMeals(mealTitle, tagTimeToMake, tagDifficulty, tagMealType, new String[0]);
+
+            //Set the adapter to use the new list instead
+            setAdapterMealList(filteredMeals);
         });
     }
 }

@@ -54,6 +54,32 @@ public class MealManager {
         return mealList;
     }
 
-    //TODO: Need to provide a lookup that satisfies all search filters
+    public List<Meal> getFilteredMeals(String title, String tagTimeToMake, String tagDifficulty, String tagMealType, String[] otherTags) {
+        ArrayList<Meal> filteredList = new ArrayList<>();
+
+        for (Meal meal : mealList) {
+            if (!title.isEmpty()) {
+                if (!meal.getTitle().contains(title))
+                    continue;
+            }
+            if (!tagTimeToMake.isEmpty()) {
+                if (!meal.getTagTimeToMake().equalsIgnoreCase(tagTimeToMake))
+                    continue;
+            }
+            if (!tagDifficulty.isEmpty()) {
+                if (!meal.getTagDifficulty().equalsIgnoreCase(tagDifficulty))
+                    continue;
+            }
+            if (!tagMealType.isEmpty()) {
+                if (!meal.getTagMealType().equalsIgnoreCase(tagMealType))
+                    continue;
+            }
+            if (otherTags.length > 0) {
+
+            }
+            filteredList.add(meal);
+        }
+        return filteredList;
+    }
 
 }
