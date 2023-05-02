@@ -115,6 +115,9 @@ public class FragmentSearchMeal extends Fragment {
 
             //Set the adapter to use the new list instead
             setAdapterMealList(filteredMeals);
+
+            //Hide the keyboard if it's shown; mainly for when they're entering a title and want to filter afterwards
+            Helper.hideKeyboard(getActivity());
         });
     }
 }
