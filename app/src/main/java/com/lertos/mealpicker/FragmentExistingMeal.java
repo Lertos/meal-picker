@@ -29,6 +29,9 @@ public class FragmentExistingMeal extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_existing_meal, container, false);
 
+        setupButtonListeners();
+
+        //Get the meal and display the relevant data of it
         int position = getArguments().getInt("MEAL_INDEX", -1);
 
         if (position != -1) {
@@ -59,6 +62,23 @@ public class FragmentExistingMeal extends Fragment {
         for (String str : otherTags)
             sb.append(str).append("\n");
         return sb.toString();
+    }
+
+    private void setupButtonListeners() {
+        //Back button
+        view.findViewById(R.id.ibBtnBack).setOnClickListener(btn -> {
+            Helper.replaceFragment(this.getActivity(), new FragmentSearchMeal(), null);
+        });
+
+        //Delete button
+        view.findViewById(R.id.ibBtnDelete).setOnClickListener(btn -> {
+
+        });
+
+        //Edit button
+        view.findViewById(R.id.ibBtnEdit).setOnClickListener(btn -> {
+
+        });
     }
 
 }
