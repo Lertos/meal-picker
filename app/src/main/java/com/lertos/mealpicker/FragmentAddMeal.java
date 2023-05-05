@@ -125,6 +125,12 @@ public class FragmentAddMeal extends Fragment {
     private String validateFields() {
         if (etMealName.getEditableText().toString().isEmpty())
             return "The Meal Name field must be entered";
+        else if (spinnerTimeToMake.getSelectedItem().toString().isEmpty())
+            return "You must select a 'Time to Make' tag that isn't blank";
+        else if (spinnerDifficulty.getSelectedItem().toString().isEmpty())
+            return "You must select a 'Difficulty' tag that isn't blank";
+        else if (spinnerMealType.getSelectedItem().toString().isEmpty())
+            return "You must select a 'Meal Type' tag that isn't blank";
         else if (etPrepTime.getEditableText().toString().isEmpty())
             return "The Prep Time field must be entered";
         else if (etCookTime.getEditableText().toString().isEmpty())
