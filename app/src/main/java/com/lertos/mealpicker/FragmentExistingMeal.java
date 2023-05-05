@@ -4,10 +4,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.lertos.mealpicker.model.DataManager;
+import com.lertos.mealpicker.model.Meal;
+
+import java.util.List;
+
 public class FragmentExistingMeal extends Fragment {
+
+    private View view;
 
     public FragmentExistingMeal() {
     }
@@ -19,9 +27,38 @@ public class FragmentExistingMeal extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_existing_meal, container, false);
+        view = inflater.inflate(R.layout.fragment_existing_meal, container, false);
 
+        int position = getArguments().getInt("MEAL_INDEX", -1);
+
+        if (position != -1) {
+            List<Meal> meals = DataManager.getInstance().getMeals().getMeals();
+
+            if (position < meals.size())
+                setupMealData(meals.get(position));
+        }
         return view;
+    }
+
+    private void setupMealData(Meal meal) {
+        ((TextView) view.findViewById(R.id.tvMealTitle)).setText(meal.getTitle());
+        ((TextView) view.findViewById(R.id.tvTimeToMake)).setText(meal.getTagTimeToMake());
+        ((TextView) view.findViewById(R.id.tvDifficulty)).setText(meal.getTagDifficulty());
+        ((TextView) view.findViewById(R.id.tvMealType)).setText(meal.getTagMealType());
+        ((TextView) view.findViewById(R.id.tvPrepTime)).setText(meal.getPrepTime().getDisplayTimeBasedOnSetting());
+        ((TextView) view.findViewById(R.id.tvCookTime)).setText(meal.getCookTime().getDisplayTimeBasedOnSetting());
+
+        String otherTagText = getOtherTagText(meal.getOtherTags());
+
+        ((TextView) view.findViewById(R.id.tvOtherTags)).setText(otherTagText);
+    }
+
+    private String getOtherTagText(String[] otherTags) {
+        StringBuilder sb = new StringBuilder();
+
+        for (String str : otherTags)
+            sb.append(str).append("\n");
+        return sb.toString();
     }
 
 }
