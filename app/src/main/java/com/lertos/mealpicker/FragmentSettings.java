@@ -13,6 +13,9 @@ import com.lertos.mealpicker.model.DataManager;
 
 public class FragmentSettings extends Fragment {
 
+    //TODO: Add a setting that says "close keyboard on new tag add" and use Helper.closeKeyboard(getActivity())
+    //TODO: Add a setting to reset the fields when adding new meals
+
     private ToggleButton tbDarkMode;
 
     public FragmentSettings() {
