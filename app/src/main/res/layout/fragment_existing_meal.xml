@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingVertical="6dp"
+    tools:context=".FragmentExistingMeal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="6dp">
+
+        <ImageButton
+            android:id="@+id/ibBtnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:src="@drawable/icon_go_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="100" />
+
+        <ImageButton
+            android:id="@+id/ibBtnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:src="@drawable/icon_delete" />
+
+        <ImageButton
+            android:id="@+id/ibBtnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:src="@drawable/icon_edit" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/divider"
+        android:layout_marginBottom="6dp" />
+
+    <TextView
+        android:id="@+id/tvMealTitle"
+        style="@style/fontHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:text="PH Meal Title"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
+    <View style="@style/divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="6dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_time_to_make" />
+
+            <TextView
+                android:id="@+id/tvTimeToMake"
+                style="@style/fontMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PH" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_difficulty" />
+
+            <TextView
+                android:id="@+id/tvDifficulty"
+                style="@style/fontMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PH" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_meal_type" />
+
+            <TextView
+                android:id="@+id/tvMealType"
+                style="@style/fontMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PH" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        style="@style/divider"
+        android:layout_marginBottom="24dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="6dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/fontMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:text="Prep Time"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/tvPrepTime"
+            style="@style/fontLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="PH"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/fontMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:text="Cook Time"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/tvCookTime"
+            style="@style/fontLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="PH"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/fontMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:text="Other Tag List"
+            android:textAlignment="center" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <TextView
+                android:id="@+id/tvOtherTags"
+                style="@style/fontLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PH"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>
