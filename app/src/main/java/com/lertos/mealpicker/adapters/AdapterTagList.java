@@ -22,6 +22,11 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
 
     public void setDataList(List<String> list) {
         tagList = list;
+
+        //Gets rid of the initial empty record
+        if (tagList.get(0).isEmpty())
+            tagList.remove(0);
+
         notifyDataSetChanged();
     }
 
