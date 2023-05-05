@@ -66,7 +66,6 @@ public class FragmentSearchMeal extends Fragment {
         addFilterSectionToggleListeners();
         addFilterButtonListener();
 
-        //TODO: Get a filtered list from the MealManager
         setAdapterMealList(DataManager.getInstance().getMeals().getMeals());
 
         return view;
@@ -86,6 +85,7 @@ public class FragmentSearchMeal extends Fragment {
     private void setAdapterMealList(List<Meal> mealList) {
         adapterMealList = new AdapterMealList();
         adapterMealList.setDataList(mealList);
+        adapterMealList.setFragmentActivity(getActivity());
 
         recyclerView.setAdapter(adapterMealList);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
