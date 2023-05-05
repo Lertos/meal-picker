@@ -79,7 +79,8 @@ public class FragmentSearchMeal extends Fragment {
         spinnerToAttachTo.setAdapter(adapter);
 
         //To allow them to select "nothing"
-        adapter.insert("", 0);
+        if (!adapter.getItem(0).isEmpty())
+            adapter.insert("", 0);
     }
 
     private void setAdapterMealList(List<Meal> mealList) {
