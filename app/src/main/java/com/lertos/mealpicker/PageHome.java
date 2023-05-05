@@ -3,9 +3,6 @@ package com.lertos.mealpicker;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.lertos.mealpicker.databinding.LayoutPageHomeBinding;
 import com.lertos.mealpicker.model.DataManager;
@@ -29,9 +26,9 @@ public class PageHome extends AppCompatActivity {
         //Set the initial screen
         if (DataManager.getInstance().hasChangedDayNightTheme()) {
             DataManager.getInstance().setChangedDayNightTheme(false);
-            replaceFragment(new FragmentSettings());
+            Helper.replaceFragment(this, new FragmentSettings());
         } else {
-            replaceFragment(new FragmentSearchMeal());
+            Helper.replaceFragment(this, new FragmentSearchMeal());
         }
 
         setupBindings();
@@ -44,31 +41,23 @@ public class PageHome extends AppCompatActivity {
         binding.bottomNav.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navBtnSearch:
-                    replaceFragment(new FragmentSearchMeal());
+                    Helper.replaceFragment(this, new FragmentSearchMeal());
                     break;
                 case R.id.navBtnAdd:
-                    replaceFragment(new FragmentAddMeal());
+                    Helper.replaceFragment(this, new FragmentAddMeal());
                     break;
                 case R.id.navBtnPlanner:
-                    replaceFragment(new FragmentMealPlanner());
+                    Helper.replaceFragment(this, new FragmentMealPlanner());
                     break;
                 case R.id.navBtnTags:
-                    replaceFragment(new FragmentTagManager());
+                    Helper.replaceFragment(this, new FragmentTagManager());
                     break;
                 case R.id.navBtnSettings:
-                    replaceFragment(new FragmentSettings());
+                    Helper.replaceFragment(this, new FragmentSettings());
                     break;
             }
             return true;
         });
-    }
-
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        fragmentTransaction.replace(R.id.frameLayout, fragment);
-        fragmentTransaction.commit();
     }
 
 }
