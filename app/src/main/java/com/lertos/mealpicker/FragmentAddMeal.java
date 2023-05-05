@@ -109,7 +109,6 @@ public class FragmentAddMeal extends Fragment {
     }
 
     private Meal addNewMeal() {
-        //TODO: Put this in it's own method such as createMeal()
         String mealTitle = etMealName.getEditableText().toString();
         int prepTime = Integer.parseInt(etPrepTime.getEditableText().toString());
         int cookTime = Integer.parseInt(etCookTime.getEditableText().toString());
@@ -118,8 +117,25 @@ public class FragmentAddMeal extends Fragment {
         String tagDifficulty = spinnerDifficulty.getSelectedItem().toString();
         String tagMealType = spinnerMealType.getSelectedItem().toString();
 
-        //TODO: Get the other tag list properly; just debugging for now as that requires a lot more logic
-        return new Meal(mealTitle, prepTime, cookTime, tagTimeToMake, tagDifficulty, tagMealType, new String[0]);
+        return new Meal(mealTitle, prepTime, cookTime, tagTimeToMake, tagDifficulty, tagMealType, getOtherTagList());
+    }
+
+    private String[] getOtherTagList() {
+        int count = 0;
+
+        for (int i = 0; i < selectedTags.length; i++) {
+            if (selectedTags[i])
+                count++;
+        }
+        String[] otherTagList = new String[count];
+
+        for (int i = 0; i < selectedTags.length; i++) {
+            if (selectedTags[i]) {
+                count--;
+                otherTagList[count] = tagOptions[i];
+            }
+        }
+        return otherTagList;
     }
 
     private String validateFields() {
