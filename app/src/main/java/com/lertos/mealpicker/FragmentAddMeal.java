@@ -96,18 +96,7 @@ public class FragmentAddMeal extends Fragment {
                 return;
             }
 
-            //TODO: Put this in it's own method such as createMeal()
-            String mealTitle = etMealName.getEditableText().toString();
-            int prepTime = Integer.parseInt(etPrepTime.getEditableText().toString());
-            int cookTime = Integer.parseInt(etCookTime.getEditableText().toString());
-
-            String tagTimeToMake = spinnerTimeToMake.getSelectedItem().toString();
-            String tagDifficulty = spinnerDifficulty.getSelectedItem().toString();
-            String tagMealType = spinnerMealType.getSelectedItem().toString();
-
-            //TODO: Get the other tag list properly; just debugging for now as that requires a lot more logic
-            Meal newMeal = new Meal(mealTitle, prepTime, cookTime, tagTimeToMake, tagDifficulty, tagMealType, new String[0]);
-
+            Meal newMeal = addNewMeal();
             boolean wasAdded = DataManager.getInstance().getMeals().addMeal(newMeal);
 
             Log.d("==Meals", DataManager.getInstance().getMeals().getMeals().toString());
@@ -117,6 +106,20 @@ public class FragmentAddMeal extends Fragment {
             else
                 Toast.makeText(this.getContext(), "That meal title already exists", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    private Meal addNewMeal() {
+        //TODO: Put this in it's own method such as createMeal()
+        String mealTitle = etMealName.getEditableText().toString();
+        int prepTime = Integer.parseInt(etPrepTime.getEditableText().toString());
+        int cookTime = Integer.parseInt(etCookTime.getEditableText().toString());
+
+        String tagTimeToMake = spinnerTimeToMake.getSelectedItem().toString();
+        String tagDifficulty = spinnerDifficulty.getSelectedItem().toString();
+        String tagMealType = spinnerMealType.getSelectedItem().toString();
+
+        //TODO: Get the other tag list properly; just debugging for now as that requires a lot more logic
+        return new Meal(mealTitle, prepTime, cookTime, tagTimeToMake, tagDifficulty, tagMealType, new String[0]);
     }
 
     private String validateFields() {
