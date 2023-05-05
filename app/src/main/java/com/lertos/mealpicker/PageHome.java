@@ -26,9 +26,9 @@ public class PageHome extends AppCompatActivity {
         //Set the initial screen
         if (DataManager.getInstance().hasChangedDayNightTheme()) {
             DataManager.getInstance().setChangedDayNightTheme(false);
-            Helper.replaceFragment(this, new FragmentSettings());
+            Helper.replaceFragment(this, new FragmentSettings(), null);
         } else {
-            Helper.replaceFragment(this, new FragmentSearchMeal());
+            Helper.replaceFragment(this, new FragmentSearchMeal(), null);
         }
 
         setupBindings();
@@ -41,19 +41,19 @@ public class PageHome extends AppCompatActivity {
         binding.bottomNav.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navBtnSearch:
-                    Helper.replaceFragment(this, new FragmentSearchMeal());
+                    Helper.replaceFragment(this, new FragmentSearchMeal(), null);
                     break;
                 case R.id.navBtnAdd:
-                    Helper.replaceFragment(this, new FragmentAddMeal());
+                    Helper.replaceFragment(this, new FragmentAddMeal(), null);
                     break;
                 case R.id.navBtnPlanner:
-                    Helper.replaceFragment(this, new FragmentMealPlanner());
+                    Helper.replaceFragment(this, new FragmentMealPlanner(), null);
                     break;
                 case R.id.navBtnTags:
-                    Helper.replaceFragment(this, new FragmentTagManager());
+                    Helper.replaceFragment(this, new FragmentTagManager(), null);
                     break;
                 case R.id.navBtnSettings:
-                    Helper.replaceFragment(this, new FragmentSettings());
+                    Helper.replaceFragment(this, new FragmentSettings(), null);
                     break;
             }
             return true;

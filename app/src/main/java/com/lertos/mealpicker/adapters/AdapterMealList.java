@@ -1,5 +1,6 @@
 package com.lertos.mealpicker.adapters;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,8 +50,10 @@ public class AdapterMealList extends RecyclerView.Adapter<AdapterMealList.ViewHo
         });
 
         holder.ibBtnChoose.setOnClickListener(view -> {
-            //TODO: Switch to the existing meal page
-            Helper.replaceFragment(fragmentActivity, new FragmentExistingMeal());
+            Bundle bundle = new Bundle();
+            bundle.putInt("MEAL_INDEX", position);
+
+            Helper.replaceFragment(fragmentActivity, new FragmentExistingMeal(), bundle);
         });
     }
 

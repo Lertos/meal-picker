@@ -1,6 +1,7 @@
 package com.lertos.mealpicker;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.fragment.app.Fragment;
@@ -18,9 +19,12 @@ public class Helper {
         }
     }
 
-    public static void replaceFragment(FragmentActivity activity, Fragment fragment) {
+    public static void replaceFragment(FragmentActivity activity, Fragment fragment, Bundle bundle) {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        if (bundle != null)
+            fragment.setArguments(bundle);
 
         fragmentTransaction.replace(R.id.frameLayout, fragment);
         fragmentTransaction.commit();
