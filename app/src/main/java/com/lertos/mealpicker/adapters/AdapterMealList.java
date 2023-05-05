@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lertos.mealpicker.FragmentSettings;
+import com.lertos.mealpicker.FragmentExistingMeal;
 import com.lertos.mealpicker.Helper;
 import com.lertos.mealpicker.R;
 import com.lertos.mealpicker.model.Meal;
@@ -50,7 +50,7 @@ public class AdapterMealList extends RecyclerView.Adapter<AdapterMealList.ViewHo
 
         holder.ibBtnChoose.setOnClickListener(view -> {
             //TODO: Switch to the existing meal page
-            Helper.replaceFragment(fragmentActivity, new FragmentSettings());
+            Helper.replaceFragment(fragmentActivity, new FragmentExistingMeal());
         });
     }
 
