@@ -16,6 +16,7 @@ import java.util.List;
 public class FragmentExistingMeal extends Fragment {
 
     private View view;
+    private int mealIndex;
 
     public FragmentExistingMeal() {
     }
@@ -32,13 +33,13 @@ public class FragmentExistingMeal extends Fragment {
         setupButtonListeners();
 
         //Get the meal and display the relevant data of it
-        int position = getArguments().getInt("MEAL_INDEX", -1);
+        mealIndex = getArguments().getInt("MEAL_INDEX", -1);
 
-        if (position != -1) {
+        if (mealIndex != -1) {
             List<Meal> meals = DataManager.getInstance().getMeals().getMeals();
 
-            if (position < meals.size())
-                setupMealData(meals.get(position));
+            if (mealIndex < meals.size())
+                setupMealData(meals.get(mealIndex));
         }
         return view;
     }
@@ -72,12 +73,16 @@ public class FragmentExistingMeal extends Fragment {
 
         //Delete button
         view.findViewById(R.id.ibBtnDelete).setOnClickListener(btn -> {
-
+            //Delete the meal then go back to the search page
+            DataManager.getInstance().getMeals().getMeals().remove(mealIndex);
+            Helper.replaceFragment(this.getActivity(), new FragmentSearchMeal(), null);
         });
 
         //Edit button
         view.findViewById(R.id.ibBtnEdit).setOnClickListener(btn -> {
-
+            //TODO: Simply load the Add Meal fragment, but have a bundle with meal index and load
+            //it in the fields. Do this after everything has loaded - then replace "Create" btn
+            //text with "Update"
         });
     }
 
