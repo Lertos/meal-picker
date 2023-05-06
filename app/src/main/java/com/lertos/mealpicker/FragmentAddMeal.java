@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
 public class FragmentAddMeal extends Fragment {
 
+    private int mealIndex;
     private Button btnCreateMeal;
     private EditText etMealName;
     private EditText etPrepTime;
@@ -76,6 +78,12 @@ public class FragmentAddMeal extends Fragment {
         selectedTags = new boolean[tagOptions.length];
 
         setupOtherTagDropdownListeners();
+
+        //Check for a meal index in the bundle; if it's supplied, then load
+        mealIndex = getArguments().getInt("MEAL_INDEX", -1);
+
+        if (mealIndex != -1 && mealIndex < DataManager.getInstance().getMeals().getMeals().size())
+            loadMealData();
 
         return view;
     }
@@ -199,5 +207,35 @@ public class FragmentAddMeal extends Fragment {
                 builder.show();
             }
         });
+    }
+
+    private void loadMealData() {
+        Meal meal = DataManager.getInstance().getMeals().getMeals().get(mealIndex);
+
+        etMealName.getEditableText().clear();
+        etMealName.getEditableText().append(meal.getTitle());
+
+        etPrepTime.getEditableText().clear();
+        etPrepTime.getEditableText().append(String.valueOf(meal.getPrepTime().getTimeInMinutes()));
+
+        etCookTime.getEditableText().clear();
+        etCookTime.getEditableText().append(String.valueOf(meal.getCookTime().getTimeInMinutes()));
+
+        setSpinnerValue(spinnerTimeToMake, meal.getTagTimeToMake());
+        setSpinnerValue(spinnerDifficulty, meal.getTagDifficulty());
+        setSpinnerValue(spinnerMealType, meal.getTagMealType());
+
+        //TODO: Fill tvOtherTagList; will need to take care of the variables for bool, array list, etc at the top
+    }
+
+    private void setSpinnerValue(Spinner spinner, String tag) {
+        Adapter adapter = spinner.getAdapter();
+
+        for (int i = 0; i < adapter.getCount(); i++) {
+            if (tag.equalsIgnoreCase(adapter.getItem(i).toString())) {
+                spinner.setSelection(i);
+                return;
+            }
+        }
     }
 }
