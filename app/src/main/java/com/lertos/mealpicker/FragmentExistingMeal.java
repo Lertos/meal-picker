@@ -80,9 +80,10 @@ public class FragmentExistingMeal extends Fragment {
 
         //Edit button
         view.findViewById(R.id.ibBtnEdit).setOnClickListener(btn -> {
-            //TODO: Simply load the Add Meal fragment, but have a bundle with meal index and load
-            //it in the fields. Do this after everything has loaded - then replace "Create" btn
-            //text with "Update"
+            Bundle bundle = new Bundle();
+
+            bundle.putInt("MEAL_INDEX", mealIndex);
+            Helper.replaceFragment(this.getActivity(), new FragmentAddMeal(), bundle);
         });
     }
 
