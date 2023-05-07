@@ -227,7 +227,15 @@ public class FragmentAddMeal extends Fragment {
         setSpinnerValue(spinnerDifficulty, meal.getTagDifficulty());
         setSpinnerValue(spinnerMealType, meal.getTagMealType());
 
-        //TODO: Fill tvOtherTagList; will need to take care of the variables for bool, array list, etc at the top
+        //Fill the other tag list, setting up the array list and boolean values for which are picked
+        for (String otherTag : meal.getOtherTags()) {
+            for (int i = 0; i < tagOptions.length; i++) {
+                if (tagOptions[i].equalsIgnoreCase(otherTag)) {
+                    selectedTags[i] = true;
+                    tagList.add(i);
+                }
+            }
+        }
     }
 
     private void setSpinnerValue(Spinner spinner, String tag) {
