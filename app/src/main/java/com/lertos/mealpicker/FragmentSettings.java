@@ -4,19 +4,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.lertos.mealpicker.model.DataManager;
 
 public class FragmentSettings extends Fragment {
 
-    //TODO: Add a setting that says "close keyboard on new tag add" and use Helper.closeKeyboard(getActivity())
-    //TODO: Add a setting to reset the fields when adding new meals
-
-    private ToggleButton tbDarkMode;
+    private SwitchMaterial switchDarkMode;
 
     public FragmentSettings() {
     }
@@ -30,15 +27,15 @@ public class FragmentSettings extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        tbDarkMode = view.findViewById(R.id.tbDarkMode);
+        switchDarkMode = view.findViewById(R.id.switchUseDarkMode);
 
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
-            tbDarkMode.setChecked(true);
+            switchDarkMode.setChecked(true);
         else
-            tbDarkMode.setChecked(false);
+            switchDarkMode.setChecked(false);
 
-        tbDarkMode.setOnClickListener(btnView -> {
-            if (tbDarkMode.isChecked())
+        switchDarkMode.setOnClickListener(btnView -> {
+            if (switchDarkMode.isChecked())
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             else
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
