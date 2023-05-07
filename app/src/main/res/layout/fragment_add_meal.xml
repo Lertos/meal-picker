@@ -176,6 +176,15 @@
             android:layout_gravity="center"
             android:text="Create" />
 
+        <Button
+            android:id="@+id/btnUpdateMeal"
+            style="@style/fontMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Update"
+            android:visibility="gone" />
+
     </LinearLayout>
 
 </FrameLayout>
