@@ -10,10 +10,6 @@
         android:icon="@drawable/icon_add_meal"
         android:title="Add Meal" />
     <item
-        android:id="@+id/navBtnPlanner"
-        android:icon="@drawable/icon_meal_planner"
-        android:title="Planner" />
-    <item
         android:id="@+id/navBtnTags"
         android:icon="@drawable/icon_tag_manager"
         android:title="Tags" />

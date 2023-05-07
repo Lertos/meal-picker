@@ -49,9 +49,6 @@ public class PageHome extends AppCompatActivity {
 
         //I hate hardcoding, but I'm also not putting try/catch blocks to get the class names via Class.forName("com.etc.theActivity")
         switch (fragmentName) {
-            case "FragmentMealPlanner":
-                binding.bottomNav.setSelectedItemId(R.id.navBtnPlanner);
-                break;
             case "FragmentTagManager":
                 binding.bottomNav.setSelectedItemId(R.id.navBtnTags);
                 break;
@@ -75,9 +72,6 @@ public class PageHome extends AppCompatActivity {
                     break;
                 case R.id.navBtnAdd:
                     Helper.replaceFragment(this, new FragmentAddMeal(), null);
-                    break;
-                case R.id.navBtnPlanner:
-                    Helper.replaceFragment(this, new FragmentMealPlanner(), null);
                     break;
                 case R.id.navBtnTags:
                     Helper.replaceFragment(this, new FragmentTagManager(), null);
