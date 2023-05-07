@@ -71,6 +71,7 @@ public class Meal implements Comparable<Meal> {
     }
 
     public String[] getOtherTags() {
+        Arrays.sort(otherTags);
         return otherTags;
     }
 
