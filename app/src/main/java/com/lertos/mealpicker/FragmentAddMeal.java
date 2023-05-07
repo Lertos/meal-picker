@@ -80,10 +80,12 @@ public class FragmentAddMeal extends Fragment {
         setupOtherTagDropdownListeners();
 
         //Check for a meal index in the bundle; if it's supplied, then load
-        mealIndex = getArguments().getInt("MEAL_INDEX", -1);
+        if (getArguments() != null) {
+            mealIndex = getArguments().getInt("MEAL_INDEX", -1);
 
-        if (mealIndex != -1 && mealIndex < DataManager.getInstance().getMeals().getMeals().size())
-            loadMealData();
+            if (mealIndex != -1 && mealIndex < DataManager.getInstance().getMeals().getMeals().size())
+                loadMealData();
+        }
 
         return view;
     }
