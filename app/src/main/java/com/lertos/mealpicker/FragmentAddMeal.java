@@ -1,7 +1,6 @@
 package com.lertos.mealpicker;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +25,7 @@ public class FragmentAddMeal extends Fragment {
 
     private int mealIndex;
     private Button btnCreateMeal;
+    private Button btnUpdateMeal;
     private EditText etMealName;
     private EditText etPrepTime;
     private EditText etCookTime;
@@ -63,10 +63,12 @@ public class FragmentAddMeal extends Fragment {
         setupStringSpinner(view, DataManager.getInstance().getTags().getTagsDifficulty(), spinnerDifficulty);
         setupStringSpinner(view, DataManager.getInstance().getTags().getTagsMealType(), spinnerMealType);
 
-        //Setup the button
+        //Setup the buttons
         btnCreateMeal = view.findViewById(R.id.btnCreateMeal);
+        btnUpdateMeal = view.findViewById(R.id.btnUpdateMeal);
 
         setupCreateButtonListener();
+        setupUpdateButtonListener();
 
         //Setup the "other tag" dropdown list
         tvOtherTagList = view.findViewById(R.id.tvOtherTagList);
@@ -83,8 +85,10 @@ public class FragmentAddMeal extends Fragment {
         if (getArguments() != null) {
             mealIndex = getArguments().getInt("MEAL_INDEX", -1);
 
-            if (mealIndex != -1 && mealIndex < DataManager.getInstance().getMeals().getMeals().size())
+            if (mealIndex != -1 && mealIndex < DataManager.getInstance().getMeals().getMeals().size()) {
                 loadMealData();
+                hideCreateShowUpdateButton();
+            }
         }
 
         return view;
@@ -95,6 +99,11 @@ public class FragmentAddMeal extends Fragment {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerToAttachTo.setAdapter(adapter);
+    }
+
+    private void hideCreateShowUpdateButton() {
+        btnCreateMeal.setVisibility(View.GONE);
+        btnUpdateMeal.setVisibility(View.VISIBLE);
     }
 
     private void setupCreateButtonListener() {
@@ -109,12 +118,33 @@ public class FragmentAddMeal extends Fragment {
             Meal newMeal = addNewMeal();
             boolean wasAdded = DataManager.getInstance().getMeals().addMeal(newMeal);
 
-            Log.d("==Meals", DataManager.getInstance().getMeals().getMeals().toString());
-
             if (wasAdded)
                 Toast.makeText(this.getContext(), "A new meal has been created!", Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(this.getContext(), "That meal title already exists", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private void setupUpdateButtonListener() {
+        btnUpdateMeal.setOnClickListener((view) -> {
+            String errorMessage = validateFields();
+
+            if (!errorMessage.isEmpty()) {
+                Toast.makeText(this.getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Meal existingMeal = DataManager.getInstance().getMeals().getMeals().get(mealIndex);
+
+            existingMeal.setTitle(etMealName.getEditableText().toString());
+            existingMeal.setPrepTime(Integer.parseInt(etPrepTime.getEditableText().toString()));
+            existingMeal.setCookTime(Integer.parseInt(etCookTime.getEditableText().toString()));
+            existingMeal.setTagTimeToMake(spinnerTimeToMake.getSelectedItem().toString());
+            existingMeal.setTagDifficulty(spinnerDifficulty.getSelectedItem().toString());
+            existingMeal.setTagMealType(spinnerMealType.getSelectedItem().toString());
+            existingMeal.setOtherTags(getOtherTagList());
+
+            Toast.makeText(this.getContext(), "Your meal has been updated", Toast.LENGTH_SHORT).show();
         });
     }
 
