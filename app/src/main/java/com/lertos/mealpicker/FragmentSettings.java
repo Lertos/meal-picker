@@ -27,8 +27,16 @@ public class FragmentSettings extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
+        //Assign the widgets
         switchDarkMode = view.findViewById(R.id.switchUseDarkMode);
 
+        //Setup default/current states and listeners
+        setupButtonDarkMode();
+
+        return view;
+    }
+
+    private void setupButtonDarkMode() {
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
             switchDarkMode.setChecked(true);
         else
@@ -43,7 +51,5 @@ public class FragmentSettings extends Fragment {
             //This is to tell the main activity to reload the settings page since the activity restarts after switching themes; yuck!
             DataManager.getInstance().setChangedDayNightTheme(true);
         });
-
-        return view;
     }
 }
