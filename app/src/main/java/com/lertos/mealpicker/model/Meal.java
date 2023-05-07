@@ -5,7 +5,8 @@ import java.util.UUID;
 
 public class Meal implements Comparable<Meal> {
 
-    private UUID uniqueId;
+    //"uniqueId" will be used for saving/loading, as well as in the MealPlanner; instead of using "title" which can change
+    private final UUID uniqueId;
     private String title;
     private Timing prepTime;
     private Timing cookTime;
@@ -91,14 +92,4 @@ public class Meal implements Comparable<Meal> {
         return this.getTitle().compareTo(meal.getTitle());
     }
 
-    @Override
-    public String toString() {
-        return '\n' + "title= " + title + '\n' +
-                ", prepTime= " + prepTime.getDisplayTimeInMinutes() + '\n' +
-                ", cookTime= " + cookTime.getDisplayTimeInMinutes() + '\n' +
-                ", tagTimeToMake= " + tagTimeToMake + '\n' +
-                ", tagDifficulty= " + tagDifficulty + '\n' +
-                ", tagMealType= " + tagMealType + '\n' +
-                ", otherTags= " + Arrays.toString(otherTags) + "\n\n";
-    }
 }
