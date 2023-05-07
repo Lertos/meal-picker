@@ -26,8 +26,6 @@ public class Helper {
         if (bundle != null)
             fragment.setArguments(bundle);
 
-        fragmentTransaction.replace(R.id.frameLayout, fragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.replace(R.id.frameLayout, fragment).addToBackStack(fragment.getClass().getSimpleName()).commit();
     }
-
 }
