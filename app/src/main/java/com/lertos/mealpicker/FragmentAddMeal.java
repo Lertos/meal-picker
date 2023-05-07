@@ -19,6 +19,7 @@ import com.lertos.mealpicker.model.DataManager;
 import com.lertos.mealpicker.model.Meal;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 public class FragmentAddMeal extends Fragment {
@@ -157,7 +158,9 @@ public class FragmentAddMeal extends Fragment {
         String tagDifficulty = spinnerDifficulty.getSelectedItem().toString();
         String tagMealType = spinnerMealType.getSelectedItem().toString();
 
-        return new Meal(mealTitle, prepTime, cookTime, tagTimeToMake, tagDifficulty, tagMealType, getOtherTagList());
+        UUID newId = UUID.randomUUID();
+
+        return new Meal(newId, mealTitle, prepTime, cookTime, tagTimeToMake, tagDifficulty, tagMealType, getOtherTagList());
     }
 
     private String[] getOtherTagList() {

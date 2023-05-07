@@ -1,9 +1,11 @@
 package com.lertos.mealpicker.model;
 
 import java.util.Arrays;
+import java.util.UUID;
 
 public class Meal implements Comparable<Meal> {
 
+    private UUID uniqueId;
     private String title;
     private Timing prepTime;
     private Timing cookTime;
@@ -12,7 +14,8 @@ public class Meal implements Comparable<Meal> {
     private String tagMealType;
     private String[] otherTags;
 
-    public Meal(String title, int prepTime, int cookTime, String tagTimeToMake, String tagDifficulty, String tagMealType, String[] otherTags) {
+    public Meal(UUID uniqueId, String title, int prepTime, int cookTime, String tagTimeToMake, String tagDifficulty, String tagMealType, String[] otherTags) {
+        this.uniqueId = uniqueId;
         this.title = title;
         this.prepTime = new Timing(prepTime);
         this.cookTime = new Timing(cookTime);
@@ -20,6 +23,10 @@ public class Meal implements Comparable<Meal> {
         this.tagDifficulty = tagDifficulty;
         this.tagMealType = tagMealType;
         this.otherTags = otherTags;
+    }
+
+    public UUID getUniqueId() {
+        return uniqueId;
     }
 
     public String getTitle() {
