@@ -54,6 +54,10 @@ public class Timing {
                 sb.append("hrs");
         }
 
+        if (minutes == 0)
+            return sb.toString();
+
+        sb.append(" ");
         sb.append(minutes);
         sb.append(" ");
 
