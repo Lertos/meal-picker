@@ -17,8 +17,9 @@ public class Timing {
     }
 
     public String getDisplayTimeBasedOnSetting() {
-        //TODO: Need to check the setting for how the time should be displayed once it's implemented on Settings page
-        return getDisplayTimeInMinutes();
+        if (DataManager.getInstance().getSettings().useMinutesOnly())
+            return getDisplayTimeInMinutes();
+        return getDisplayTimeInHoursAndMinutes();
     }
 
     public String getDisplayTimeInMinutes() {
