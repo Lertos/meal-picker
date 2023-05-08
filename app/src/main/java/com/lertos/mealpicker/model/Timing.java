@@ -26,7 +26,11 @@ public class Timing {
 
         sb.append(timeInMinutes);
         sb.append(" ");
-        sb.append("mins");
+
+        if (timeInMinutes == 1)
+            sb.append("min");
+        else
+            sb.append("mins");
 
         return sb.toString();
     }
@@ -42,12 +46,20 @@ public class Timing {
         if (hours > 0) {
             sb.append(hours);
             sb.append(" ");
-            sb.append("hrs");
+
+            if (hours == 1)
+                sb.append("hr");
+            else
+                sb.append("hrs");
         }
 
         sb.append(minutes);
         sb.append(" ");
-        sb.append("mins");
+
+        if (minutes == 1)
+            sb.append("min");
+        else
+            sb.append("mins");
 
         return sb.toString();
     }
