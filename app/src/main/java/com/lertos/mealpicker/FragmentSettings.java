@@ -46,7 +46,23 @@ public class FragmentSettings extends Fragment {
 
         //Setup default/configured starting states
         addTimeFormatListValues();
-        //TODO: Load or set defaults from settings
+
+        //--Time Format
+        if (DataManager.getInstance().getSettings().useMinutesOnly())
+            spinnerTimeFormat.setSelection(0);
+        else
+            spinnerTimeFormat.setSelection(1);
+
+        //--Dark Mode
+        if (DataManager.getInstance().getSettings().useDarkMode())
+            switchDarkMode.setChecked(true);
+        else
+            switchDarkMode.setChecked(false);
+
+        //--CloseKeyboard
+        switchCloseKeyboardOnAdd.setChecked(DataManager.getInstance().getSettings().useCloseKeyboardAfterTagCreation());
+        //--ResetFields
+        switchResetFieldsOnAdd.setChecked(DataManager.getInstance().getSettings().useResetFieldsAfterMealCreation());
 
         //Setup widget listeners
         setupTimeFormatListener();
@@ -88,12 +104,9 @@ public class FragmentSettings extends Fragment {
     }
 
     private void setupButtonDarkMode() {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
-            switchDarkMode.setChecked(true);
-        else
-            switchDarkMode.setChecked(false);
-
         switchDarkMode.setOnClickListener(btnView -> {
+            DataManager.getInstance().getSettings().setUseDarkMode(switchDarkMode.isChecked());
+
             if (switchDarkMode.isChecked())
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             else
