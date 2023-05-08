@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:text="Close Keyboard After Adding New Tag"
+                android:text="Close Keyboard After Tag Creation"
                 android:textAlignment="textStart" />
 
         </LinearLayout>
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:text="Reset Fields After Adding New Tag"
+                android:text="Reset Fields After Creating Meal"
                 android:textAlignment="textStart" />
 
         </LinearLayout>
