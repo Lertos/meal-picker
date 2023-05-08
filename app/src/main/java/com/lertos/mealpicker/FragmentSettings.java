@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 
 public class FragmentSettings extends Fragment {
 
+    private final String minutesOnlyText = "200 mins";
+    private final String minutesAndHoursText = "3 hrs 20 mins";
     private Spinner spinnerTimeFormat;
     private SwitchMaterial switchDarkMode;
     private SwitchMaterial switchCloseKeyboardOnAdd;
@@ -46,6 +49,7 @@ public class FragmentSettings extends Fragment {
         //TODO: Load or set defaults from settings
 
         //Setup widget listeners
+        setupTimeFormatListener();
         setupButtonDarkMode();
         setupButtonCloseKeyboardOnAdd();
         setupButtonResetFieldsOnAdd();
@@ -56,13 +60,31 @@ public class FragmentSettings extends Fragment {
     private void addTimeFormatListValues() {
         ArrayList<String> timeFormats = new ArrayList<>();
 
-        timeFormats.add("200 mins");
-        timeFormats.add("3 hrs 20 mins ");
+        timeFormats.add(minutesOnlyText);
+        timeFormats.add(minutesAndHoursText);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_item, timeFormats);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTimeFormat.setAdapter(adapter);
+    }
+
+    private void setupTimeFormatListener() {
+        spinnerTimeFormat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String optionText = parent.getItemAtPosition(position).toString();
+
+                if (optionText.equalsIgnoreCase(minutesOnlyText))
+                    DataManager.getInstance().getSettings().setUseMinutesOnly(true);
+                else
+                    DataManager.getInstance().getSettings().setUseMinutesOnly(false);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
     private void setupButtonDarkMode() {
