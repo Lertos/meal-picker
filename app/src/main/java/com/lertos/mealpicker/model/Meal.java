@@ -51,7 +51,7 @@ public class Meal implements Comparable<Meal> {
     }
 
     public void setCookTime(int cookTime) {
-        this.prepTime.setTimeInMinutes(cookTime);
+        this.cookTime.setTimeInMinutes(cookTime);
     }
 
     public String getTagTimeToMake() {
