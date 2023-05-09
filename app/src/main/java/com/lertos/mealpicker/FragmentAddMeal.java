@@ -234,9 +234,9 @@ public class FragmentAddMeal extends Fragment {
                 builder.setNeutralButton("Clear All", (dialogInterface, i) -> {
                     for (int j = 0; j < selectedTags.length; j++) {
                         selectedTags[j] = false;
-                        tagList.clear();
-                        tvOtherTagList.setText("");
                     }
+                    tagList.clear();
+                    tvOtherTagList.setText("");
                 });
 
                 builder.show();
