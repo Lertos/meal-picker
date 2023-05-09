@@ -176,16 +176,33 @@ public class FragmentSearchMeal extends Fragment {
         });
     }
 
+    private String[] getOtherTagList() {
+        int count = 0;
+
+        for (int i = 0; i < selectedTags.length; i++) {
+            if (selectedTags[i])
+                count++;
+        }
+        String[] otherTagList = new String[count];
+
+        for (int i = 0; i < selectedTags.length; i++) {
+            if (selectedTags[i]) {
+                count--;
+                otherTagList[count] = tagOptions[i];
+            }
+        }
+        return otherTagList;
+    }
+
     private void addFilterButtonListener() {
         btnFilter.setOnClickListener(btn -> {
             String mealTitle = etMealName.getEditableText().toString();
             String tagTimeToMake = spinnerTimeToMake.getSelectedItem().toString();
             String tagDifficulty = spinnerDifficulty.getSelectedItem().toString();
             String tagMealType = spinnerMealType.getSelectedItem().toString();
-            //TODO: Get the other tag list properly; just debugging for now as that requires a lot more logic
 
             //Get the list of meals based on search filters
-            List<Meal> filteredMeals = DataManager.getInstance().getMeals().getFilteredMeals(mealTitle, tagTimeToMake, tagDifficulty, tagMealType, new String[0]);
+            List<Meal> filteredMeals = DataManager.getInstance().getMeals().getFilteredMeals(mealTitle, tagTimeToMake, tagDifficulty, tagMealType, getOtherTagList());
 
             //Set the adapter to use the new list instead
             setAdapterMealList(filteredMeals);
