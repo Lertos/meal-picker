@@ -8,7 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +34,10 @@ public class FragmentSearchMeal extends Fragment {
     private Spinner spinnerDifficulty;
     private Spinner spinnerMealType;
     private EditText etMealName;
+    private TextView tvOtherTagList;
+    private ArrayList<Integer> tagList = new ArrayList<>();
+    private boolean[] selectedTags;
+    private String[] tagOptions;
 
     public FragmentSearchMeal() {
     }
@@ -63,6 +69,13 @@ public class FragmentSearchMeal extends Fragment {
         setupStringSpinner(view, DataManager.getInstance().getTags().getTagsDifficulty(), spinnerDifficulty);
         setupStringSpinner(view, DataManager.getInstance().getTags().getTagsMealType(), spinnerMealType);
 
+        //Setup the "other tag" dropdown
+        tvOtherTagList = view.findViewById(R.id.tvOtherTagList);
+
+        setupOtherTagDropdownList();
+        setupOtherTagDropdownListeners();
+
+        //Set up the button listeners
         addFilterSectionToggleListeners();
         addFilterButtonListener();
 
@@ -80,6 +93,66 @@ public class FragmentSearchMeal extends Fragment {
         //To allow them to select "nothing"
         if (!adapter.getItem(0).isEmpty())
             adapter.insert("", 0);
+    }
+
+    private void setupOtherTagDropdownList() {
+        ArrayList<String> otherTags = DataManager.getInstance().getTags().getTagsOther();
+
+        tagOptions = new String[otherTags.size()];
+        tagOptions = otherTags.toArray(tagOptions);
+
+        selectedTags = new boolean[tagOptions.length];
+
+        tagList.clear();
+        tvOtherTagList.setText("");
+    }
+
+    private void setupOtherTagDropdownListeners() {
+        tvOtherTagList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setTitle("Select All Tags That Apply");
+                //builder.setCancelable(true); //If needed, makes outside clicks impossible
+
+                //Handle the individual checkboxes
+                builder.setMultiChoiceItems(tagOptions, selectedTags, (dialogInterface, index, bool) -> {
+                    if (bool)
+                        tagList.add(index); //For the position clicked, add it to the list of tags
+                    else
+                        tagList.remove(Integer.valueOf(index)); //For the position clicked, remove it from the list of tags
+                });
+
+                //Handle the OK button
+                builder.setPositiveButton("OK", (dialogInterface, i) -> setOtherTagText());
+
+                //Cancel simply dismisses the alert dialogue
+                builder.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
+
+                //Handle the Clear All button
+                builder.setNeutralButton("Clear All", (dialogInterface, i) -> {
+                    for (int j = 0; j < selectedTags.length; j++) {
+                        selectedTags[j] = false;
+                    }
+                    tagList.clear();
+                    tvOtherTagList.setText("");
+                });
+
+                builder.show();
+            }
+        });
+    }
+
+    private void setOtherTagText() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int j = 0; j < tagList.size(); j++) {
+            stringBuilder.append(tagOptions[tagList.get(j)]);
+
+            if (j != tagList.size() - 1)
+                stringBuilder.append(", ");
+        }
+        tvOtherTagList.setText(stringBuilder.toString());
     }
 
     private void setAdapterMealList(List<Meal> mealList) {
