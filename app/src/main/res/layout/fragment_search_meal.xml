@@ -152,7 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:orientation="vertical">
 
                     <TextView
@@ -187,13 +187,15 @@
                         android:text="Other"
                         android:textAlignment="center" />
 
-                    <!--TODO: Make this into a TextView like the tag manager page has -->
-                    <Spinner
-                        android:id="@+id/spinnerOther"
-                        style="@style/fontMedium"
+                    <TextView
+                        android:id="@+id/tvOtherTagList"
+                        style="@style/Widget.AppTheme.TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:spinnerMode="dropdown" />
+                        android:drawableRight="@drawable/icon_spinner_arrow"
+                        android:drawablePadding="16dp"
+                        android:hint="Select Other Tags"
+                        android:maxLines="1" />
 
                 </LinearLayout>
 
