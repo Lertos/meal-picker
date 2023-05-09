@@ -144,6 +144,10 @@ public class FragmentAddMeal extends Fragment {
             Meal newMeal = addNewMeal();
             boolean wasAdded = DataManager.getInstance().getMeals().addMeal(newMeal);
 
+            //Check if the user wants the fields to be reset for the next meal
+            if (DataManager.getInstance().getSettings().useResetFieldsAfterMealCreation())
+                resetFields();
+
             if (wasAdded)
                 Toast.makeText(this.getContext(), "A new meal has been created!", Toast.LENGTH_SHORT).show();
             else
