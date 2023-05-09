@@ -28,6 +28,7 @@ public class FragmentAddMeal extends Fragment {
     private int mealIndex;
     private Button btnCreateMeal;
     private Button btnUpdateMeal;
+    private Button btnResetFields;
     private EditText etMealName;
     private EditText etPrepTime;
     private EditText etCookTime;
@@ -68,9 +69,11 @@ public class FragmentAddMeal extends Fragment {
         //Setup the buttons
         btnCreateMeal = view.findViewById(R.id.btnCreateMeal);
         btnUpdateMeal = view.findViewById(R.id.btnUpdateMeal);
+        btnResetFields = view.findViewById(R.id.btnResetFields);
 
         setupCreateButtonListener();
         setupUpdateButtonListener();
+        btnResetFields.setOnClickListener(btn -> resetFields());
 
         //Setup the "other tag" dropdown list
         tvOtherTagList = view.findViewById(R.id.tvOtherTagList);
@@ -106,6 +109,20 @@ public class FragmentAddMeal extends Fragment {
     private void hideCreateShowUpdateButton() {
         btnCreateMeal.setVisibility(View.GONE);
         btnUpdateMeal.setVisibility(View.VISIBLE);
+    }
+
+    private void resetFields() {
+        etMealName.getEditableText().clear();
+        etPrepTime.getEditableText().clear();
+        etCookTime.getEditableText().clear();
+
+        spinnerTimeToMake.setSelection(0);
+        spinnerDifficulty.setSelection(0);
+        spinnerMealType.setSelection(0);
+
+        setupOtherTagDropdownList();
+
+        etMealName.requestFocus();
     }
 
     private void setupCreateButtonListener() {
