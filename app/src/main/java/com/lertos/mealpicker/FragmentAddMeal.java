@@ -243,18 +243,7 @@ public class FragmentAddMeal extends Fragment {
                 });
 
                 //Handle the OK button
-                builder.setPositiveButton("OK", (dialogInterface, i) -> {
-                    //Display the tags in the text view after selection
-                    StringBuilder stringBuilder = new StringBuilder();
-
-                    for (int j = 0; j < tagList.size(); j++) {
-                        stringBuilder.append(tagOptions[tagList.get(j)]);
-
-                        if (j != tagList.size() - 1)
-                            stringBuilder.append(", ");
-                    }
-                    tvOtherTagList.setText(stringBuilder.toString());
-                });
+                builder.setPositiveButton("OK", (dialogInterface, i) -> setOtherTagText());
 
                 //Cancel simply dismisses the alert dialogue
                 builder.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
@@ -271,6 +260,18 @@ public class FragmentAddMeal extends Fragment {
                 builder.show();
             }
         });
+    }
+
+    private void setOtherTagText() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int j = 0; j < tagList.size(); j++) {
+            stringBuilder.append(tagOptions[tagList.get(j)]);
+
+            if (j != tagList.size() - 1)
+                stringBuilder.append(", ");
+        }
+        tvOtherTagList.setText(stringBuilder.toString());
     }
 
     private void loadMealData() {
@@ -298,6 +299,7 @@ public class FragmentAddMeal extends Fragment {
                 }
             }
         }
+        setOtherTagText();
     }
 
     private void setSpinnerValue(Spinner spinner, String tag) {
