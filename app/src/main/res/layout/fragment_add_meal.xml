@@ -164,22 +164,39 @@
             android:hint="Select Other Tags"
             android:maxLines="1" />
 
-        <Button
-            android:id="@+id/btnCreateMeal"
-            style="@style/fontMedium"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Create" />
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnUpdateMeal"
-            style="@style/fontMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Update"
-            android:visibility="gone" />
+            <Button
+                android:id="@+id/btnCreateMeal"
+                style="@style/fontMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Create Meal" />
+
+            <Button
+                android:id="@+id/btnUpdateMeal"
+                style="@style/fontMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Update Meal"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnResetFields"
+                style="@style/fontMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:text="Clear Fields" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
