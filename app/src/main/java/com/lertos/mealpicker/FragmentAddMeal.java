@@ -75,15 +75,10 @@ public class FragmentAddMeal extends Fragment {
         setupUpdateButtonListener();
         btnResetFields.setOnClickListener(btn -> resetFields());
 
-        //Setup the "other tag" dropdown list
+        //Setup the "other tag" dropdown
         tvOtherTagList = view.findViewById(R.id.tvOtherTagList);
-        ArrayList<String> otherTags = DataManager.getInstance().getTags().getTagsOther();
 
-        tagOptions = new String[otherTags.size()];
-        tagOptions = otherTags.toArray(tagOptions);
-
-        selectedTags = new boolean[tagOptions.length];
-
+        setupOtherTagDropdownList();
         setupOtherTagDropdownListeners();
 
         //Check for a meal index in the bundle; if it's supplied, then load
@@ -104,6 +99,18 @@ public class FragmentAddMeal extends Fragment {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerToAttachTo.setAdapter(adapter);
+    }
+
+    private void setupOtherTagDropdownList() {
+        ArrayList<String> otherTags = DataManager.getInstance().getTags().getTagsOther();
+
+        tagOptions = new String[otherTags.size()];
+        tagOptions = otherTags.toArray(tagOptions);
+
+        selectedTags = new boolean[tagOptions.length];
+
+        tagList.clear();
+        tvOtherTagList.setText("");
     }
 
     private void hideCreateShowUpdateButton() {
