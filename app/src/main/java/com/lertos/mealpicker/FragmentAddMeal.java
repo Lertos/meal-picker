@@ -95,6 +95,9 @@ public class FragmentAddMeal extends Fragment {
     }
 
     private void setupStringSpinner(View view, ArrayList<String> stringList, Spinner spinnerToAttachTo) {
+        //Gets rid of the blanks put in by the search page
+        stringList.remove("");
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, stringList);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
