@@ -3,7 +3,6 @@ package com.lertos.mealpicker.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 public class MealManager {
 
@@ -13,8 +12,8 @@ public class MealManager {
         this.mealList = new ArrayList<>();
 
         //TODO: Debug meals
-        Meal meal1 = new Meal(UUID.randomUUID(), "Burger Pasta", 30, 120, "Long", "Hard", "Supper", new String[]{"Treat", "Beef"});
-        Meal meal2 = new Meal(UUID.randomUUID(), "Pizza Salad", 15, 5, "Short", "Easy", "Lunch", new String[]{"Chicken", "Beef", "Veggies"});
+        Meal meal1 = new Meal("Burger Pasta", 30, 120, "Long", "Hard", "Supper", new String[]{"Treat", "Beef"});
+        Meal meal2 = new Meal("Pizza Salad", 15, 5, "Short", "Easy", "Lunch", new String[]{"Chicken", "Beef", "Veggies"});
 
         mealList.add(meal1);
         mealList.add(meal2);

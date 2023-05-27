@@ -1,12 +1,9 @@
 package com.lertos.mealpicker.model;
 
 import java.util.Arrays;
-import java.util.UUID;
 
 public class Meal implements Comparable<Meal> {
 
-    //"uniqueId" will be used for saving/loading, as well as in the MealPlanner; instead of using "title" which can change
-    private final UUID uniqueId;
     private String title;
     private Timing prepTime;
     private Timing cookTime;
@@ -15,8 +12,7 @@ public class Meal implements Comparable<Meal> {
     private String tagMealType;
     private String[] otherTags;
 
-    public Meal(UUID uniqueId, String title, int prepTime, int cookTime, String tagTimeToMake, String tagDifficulty, String tagMealType, String[] otherTags) {
-        this.uniqueId = uniqueId;
+    public Meal(String title, int prepTime, int cookTime, String tagTimeToMake, String tagDifficulty, String tagMealType, String[] otherTags) {
         this.title = title;
         this.prepTime = new Timing(prepTime);
         this.cookTime = new Timing(cookTime);
@@ -24,10 +20,6 @@ public class Meal implements Comparable<Meal> {
         this.tagDifficulty = tagDifficulty;
         this.tagMealType = tagMealType;
         this.otherTags = otherTags;
-    }
-
-    public UUID getUniqueId() {
-        return uniqueId;
     }
 
     public String getTitle() {
