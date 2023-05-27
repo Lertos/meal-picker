@@ -1,11 +1,14 @@
 package com.lertos.mealpicker.model;
 
+import android.content.Context;
+
 public class DataManager {
 
     public static DataManager instance;
-    private Settings settings = new Settings();
-    private TagManager tagManager = new TagManager();
-    private MealManager mealManager = new MealManager();
+    private FileManager fileManager;
+    private Settings settings;
+    private TagManager tagManager;
+    private MealManager mealManager;
     //This setting is to reload the settings page since the activity restarts after switching themes; yuck!
     private boolean changedDayNightTheme = false;
 
@@ -16,6 +19,19 @@ public class DataManager {
         if (instance == null)
             instance = new DataManager();
         return instance;
+    }
+
+    public void initialLoad(Context context) {
+        fileManager = new FileManager(context);
+
+        //TODO: Get all the data from the file; or serve defaults
+        settings = new Settings();
+        tagManager = new TagManager();
+        mealManager = new MealManager();
+    }
+
+    public FileManager getFile() {
+        return fileManager;
     }
 
     public Settings getSettings() {

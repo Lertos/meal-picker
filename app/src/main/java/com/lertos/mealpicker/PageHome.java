@@ -11,10 +11,16 @@ import com.lertos.mealpicker.model.DataManager;
 public class PageHome extends AppCompatActivity {
 
     private LayoutPageHomeBinding binding;
+    private boolean hasStarted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!hasStarted) {
+            DataManager.getInstance().initialLoad(getApplicationContext());
+            hasStarted = true;
+        }
 
         binding = LayoutPageHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
