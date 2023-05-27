@@ -2,25 +2,18 @@ package com.lertos.mealpicker.model;
 
 import android.content.Context;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class FileManager {
     private final Context context;
-    private DataFile settingsFile = new DataFile("settings.txt");
-    private DataFile tagFile = new DataFile("tags.txt");
-    private DataFile mealFile = new DataFile("meals.txt");
+    private DataFile settingsFile;
+    private DataFile tagFile;
+    private DataFile mealFile;
 
     public FileManager(Context context) {
         this.context = context;
-    }
 
-    private boolean doesFileExist(String fileName) {
-        List<String> files = Arrays.asList(context.fileList());
-
-        if (files.contains(fileName))
-            return true;
-        return false;
+        this.settingsFile = new DataFile(context, "settings.txt");
+        this.tagFile = new DataFile(context, "tags.txt");
+        this.mealFile = new DataFile(context, "meals.txt");
     }
 
     private void createFileWithDefaults() {
