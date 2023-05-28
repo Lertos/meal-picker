@@ -21,10 +21,6 @@ public class DataFile {
             createFile();
     }
 
-    public String getFileName() {
-        return fileName;
-    }
-
     private boolean doesFileExist() {
         String[] files = context.fileList();
 
