@@ -1,6 +1,8 @@
 package com.lertos.mealpicker.model;
 
-public class Timing {
+import java.io.Serializable;
+
+public class Timing implements Serializable {
 
     private int timeInMinutes;
 

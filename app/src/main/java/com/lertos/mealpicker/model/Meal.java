@@ -1,8 +1,9 @@
 package com.lertos.mealpicker.model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Meal implements Comparable<Meal> {
+public class Meal implements Comparable<Meal>, Serializable {
 
     private String title;
     private Timing prepTime;
