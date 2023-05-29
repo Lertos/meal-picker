@@ -24,10 +24,27 @@ public class DataManager {
     public void initialLoad(Context context) {
         fileManager = new FileManager(context);
 
-        //TODO: Get all the data from the file; or serve defaults
-        settings = new Settings();
-        tagManager = new TagManager();
-        mealManager = new MealManager();
+        //Load all of classes from saved data. If no save data exists, load defaults
+        settings = fileManager.getSettingsFile().loadFromFile();
+
+        if (settings == null) {
+            settings = new Settings();
+            fileManager.getSettingsFile().saveToFile(settings);
+        }
+
+        tagManager = fileManager.getTagFile().loadFromFile();
+
+        if (tagManager == null) {
+            tagManager = new TagManager();
+            fileManager.getTagFile().saveToFile(tagManager);
+        }
+
+        mealManager = fileManager.getMealFile().loadFromFile();
+
+        if (mealManager == null) {
+            mealManager = new MealManager();
+            fileManager.getMealFile().saveToFile(mealManager);
+        }
     }
 
     public FileManager getFile() {
