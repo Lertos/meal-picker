@@ -66,9 +66,11 @@ public class DataFile {
             obj = (T) ois.readObject();
             ois.close();
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            Log.d(fileName, "CLASS NOT FOUND; LOADING DEFAULT");
+            return null;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Log.d(fileName, "IOException; LOADING DEFAULT");
+            return null;
         }
         Log.d(fileName, "FILE LOADED");
 
