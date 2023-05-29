@@ -1,10 +1,11 @@
 package com.lertos.mealpicker.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MealManager {
+public class MealManager implements Serializable {
 
     private ArrayList<Meal> mealList;
 
@@ -17,12 +18,6 @@ public class MealManager {
 
         mealList.add(meal1);
         mealList.add(meal2);
-
-        loadSavedMeals();
-    }
-
-    private void loadSavedMeals() {
-        //TODO: Load the meals from the local save file
     }
 
     public boolean addMeal(Meal newMeal) {

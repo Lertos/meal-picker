@@ -1,10 +1,11 @@
 package com.lertos.mealpicker.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class TagManager {
+public class TagManager implements Serializable {
 
     //Tags are essentially just Strings
     //They are in different lists which serve different purposes. But they're still just Strings.
@@ -19,7 +20,7 @@ public class TagManager {
         tagsMealType = new ArrayList<>();
         tagsOther = new ArrayList<>();
 
-        //TODO: Load these from a local file instead
+        //Providing defaults that most people would use
         tagsTimeToMake.add("Instant");
         tagsTimeToMake.add("Short");
         tagsTimeToMake.add("Medium");

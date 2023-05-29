@@ -1,6 +1,8 @@
 package com.lertos.mealpicker.model;
 
-public class Settings {
+import java.io.Serializable;
+
+public class Settings implements Serializable {
 
     private boolean useMinutesOnly = false;
     private boolean useDarkMode = false;
@@ -8,11 +10,6 @@ public class Settings {
     private boolean resetFieldsAfterMealCreation = false;
 
     public Settings() {
-        loadSettings();
-    }
-
-    private void loadSettings() {
-        //TODO: Load settings from the local config file/create new file if it doesn't exist with defaults
     }
 
     public boolean useMinutesOnly() {
