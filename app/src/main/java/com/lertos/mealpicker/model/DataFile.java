@@ -60,7 +60,7 @@ public class DataFile {
     public <T extends Serializable> T loadFromFile() {
         T obj;
 
-        try (FileInputStream fis = new FileInputStream(fileName)) {
+        try (FileInputStream fis = context.openFileInput(fileName)) {
             ObjectInputStream ois = new ObjectInputStream(fis);
 
             obj = (T) ois.readObject();
@@ -69,6 +69,7 @@ public class DataFile {
             Log.d(fileName, "CLASS NOT FOUND; LOADING DEFAULT");
             return null;
         } catch (IOException e) {
+            e.printStackTrace();
             Log.d(fileName, "IOException; LOADING DEFAULT");
             return null;
         }
