@@ -12,12 +12,17 @@ public class Settings implements Serializable {
     public Settings() {
     }
 
+    private void saveFile() {
+        DataManager.getInstance().getFile().getSettingsFile().saveToFile(this);
+    }
+
     public boolean useMinutesOnly() {
         return useMinutesOnly;
     }
 
     public void setUseMinutesOnly(boolean useMinutesOnly) {
         this.useMinutesOnly = useMinutesOnly;
+        saveFile();
     }
 
     public boolean useDarkMode() {
@@ -26,6 +31,7 @@ public class Settings implements Serializable {
 
     public void setUseDarkMode(boolean useDarkMode) {
         this.useDarkMode = useDarkMode;
+        saveFile();
     }
 
     public boolean useCloseKeyboardAfterTagCreation() {
@@ -34,6 +40,7 @@ public class Settings implements Serializable {
 
     public void setCloseKeyboardAfterTagCreation(boolean closeKeyboardAfterTagCreation) {
         this.closeKeyboardAfterTagCreation = closeKeyboardAfterTagCreation;
+        saveFile();
     }
 
     public boolean useResetFieldsAfterMealCreation() {
@@ -42,5 +49,6 @@ public class Settings implements Serializable {
 
     public void setResetFieldsAfterMealCreation(boolean resetFieldsAfterMealCreation) {
         this.resetFieldsAfterMealCreation = resetFieldsAfterMealCreation;
+        saveFile();
     }
 }
