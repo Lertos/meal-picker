@@ -8,9 +8,9 @@ public class FileManager {
     private DataFile mealFile;
 
     public FileManager(Context context) {
-        this.settingsFile = new DataFile(context, "settings.txt");
-        this.tagFile = new DataFile(context, "tags.txt");
-        this.mealFile = new DataFile(context, "meals.txt");
+        this.settingsFile = new DataFile(context, "settings.ser");
+        this.tagFile = new DataFile(context, "tags.ser");
+        this.mealFile = new DataFile(context, "meals.ser");
     }
 
     public DataFile getSettingsFile() {
