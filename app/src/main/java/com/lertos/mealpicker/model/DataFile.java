@@ -3,8 +3,12 @@ package com.lertos.mealpicker.model;
 import android.content.Context;
 import android.util.Log;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 
@@ -40,12 +44,35 @@ public class DataFile {
         Log.d(fileName, "FILE CREATED");
     }
 
-    public <T extends Serializable> boolean saveToFile(T obj) {
-        return false;
+    public <T extends Serializable> void saveToFile(T obj) {
+        try (FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE)) {
+            ObjectOutput out = new ObjectOutputStream(fos);
+
+            out.writeObject(obj);
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Log.d(fileName, "FILE SAVED");
     }
 
     public <T extends Serializable> T loadFromFile() {
-        return null;
+        T obj;
+
+        try (FileInputStream fis = new FileInputStream(fileName)) {
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            obj = (T) ois.readObject();
+            ois.close();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Log.d(fileName, "FILE LOADED");
+
+        return obj;
     }
 }
 
