@@ -13,10 +13,6 @@ public class FileManager {
         this.mealFile = new DataFile(context, "meals.txt");
     }
 
-    private void createFileWithDefaults() {
-
-    }
-
     public DataFile getSettingsFile() {
         return settingsFile;
     }
