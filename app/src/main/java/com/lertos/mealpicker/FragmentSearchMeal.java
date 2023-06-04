@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -21,14 +22,17 @@ import com.lertos.mealpicker.model.Meal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class FragmentSearchMeal extends Fragment {
 
+    private Random rng;
     private View view;
     private RecyclerView recyclerView;
     private AdapterMealList adapterMealList;
     private Button btnHideFilters;
     private Button btnShowFilters;
+    private Button btnSurpriseMe;
     private Button btnFilter;
     private Spinner spinnerTimeToMake;
     private Spinner spinnerDifficulty;
@@ -51,6 +55,8 @@ public class FragmentSearchMeal extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_search_meal, container, false);
 
+        rng = new Random();
+
         recyclerView = view.findViewById(R.id.rvMealList);
 
         etMealName = view.findViewById(R.id.etMealName);
@@ -58,6 +64,7 @@ public class FragmentSearchMeal extends Fragment {
         //Set up the buttons
         btnHideFilters = view.findViewById(R.id.btnHideFilters);
         btnShowFilters = view.findViewById(R.id.btnShowFilters);
+        btnSurpriseMe = view.findViewById(R.id.btnSurpriseMe);
         btnFilter = view.findViewById(R.id.btnFilter);
 
         //Set up the spinners
@@ -77,6 +84,7 @@ public class FragmentSearchMeal extends Fragment {
 
         //Set up the button listeners
         addFilterSectionToggleListeners();
+        addSurpriseMeButtonListener();
         addFilterButtonListener();
 
         setAdapterMealList(DataManager.getInstance().getMeals().getSortedMeals());
@@ -194,21 +202,49 @@ public class FragmentSearchMeal extends Fragment {
         return otherTagList;
     }
 
+    private void addSurpriseMeButtonListener() {
+        btnSurpriseMe.setOnClickListener(btn -> {
+            List<Meal> filteredList = getFilteredMeals();
+
+            if (filteredList.isEmpty()) {
+                Toast.makeText(this.getContext(), "No meals were returned for this filter", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            //Get the meal you want out of the filtered list
+            Meal randomMeal = filteredList.get(rng.nextInt(filteredList.size()));
+
+            //Now find that meal again in the normal list so you can pass the meal index to the existing meal page
+            List<Meal> meals = DataManager.getInstance().getMeals().getMeals();
+
+            for (int i = 0; i < meals.size(); i++) {
+                if (meals.get(i).getTitle().equalsIgnoreCase(randomMeal.getTitle())) {
+                    Bundle bundle = new Bundle();
+
+                    bundle.putInt("MEAL_INDEX", i);
+                    Helper.replaceFragment(this.getActivity(), new FragmentExistingMeal(), bundle);
+                }
+            }
+        });
+    }
+
     private void addFilterButtonListener() {
         btnFilter.setOnClickListener(btn -> {
-            String mealTitle = etMealName.getEditableText().toString();
-            String tagTimeToMake = spinnerTimeToMake.getSelectedItem().toString();
-            String tagDifficulty = spinnerDifficulty.getSelectedItem().toString();
-            String tagMealType = spinnerMealType.getSelectedItem().toString();
-
-            //Get the list of meals based on search filters
-            List<Meal> filteredMeals = DataManager.getInstance().getMeals().getFilteredMeals(mealTitle, tagTimeToMake, tagDifficulty, tagMealType, getOtherTagList());
-
             //Set the adapter to use the new list instead
-            setAdapterMealList(filteredMeals);
+            setAdapterMealList(getFilteredMeals());
 
             //Hide the keyboard if it's shown; mainly for when they're entering a title and want to filter afterwards
             Helper.hideKeyboard(getActivity());
         });
+    }
+
+    private List<Meal> getFilteredMeals() {
+        String mealTitle = etMealName.getEditableText().toString();
+        String tagTimeToMake = spinnerTimeToMake.getSelectedItem().toString();
+        String tagDifficulty = spinnerDifficulty.getSelectedItem().toString();
+        String tagMealType = spinnerMealType.getSelectedItem().toString();
+
+        //Return the list of meals based on search filters
+        return DataManager.getInstance().getMeals().getFilteredMeals(mealTitle, tagTimeToMake, tagDifficulty, tagMealType, getOtherTagList());
     }
 }
