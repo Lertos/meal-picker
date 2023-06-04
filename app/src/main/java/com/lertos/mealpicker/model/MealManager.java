@@ -12,12 +12,10 @@ public class MealManager implements Serializable {
     public MealManager() {
         this.mealList = new ArrayList<>();
 
-        //TODO: Debug meals
-        Meal meal1 = new Meal("Burger Pasta", 30, 120, "Long", "Hard", "Supper", new String[]{"Treat", "Beef"});
-        Meal meal2 = new Meal("Pizza Salad", 15, 5, "Short", "Easy", "Lunch", new String[]{"Chicken", "Beef", "Veggies"});
+        //Sample meal for them to see how it works
+        Meal meal = new Meal("Sample Meal", 42, 420, "Long", "Hard", "Supper", new String[]{"Treat"});
 
-        mealList.add(meal1);
-        mealList.add(meal2);
+        mealList.add(meal);
     }
 
     public boolean addMeal(Meal newMeal) {
