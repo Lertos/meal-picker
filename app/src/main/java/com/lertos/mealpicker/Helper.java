@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -27,5 +28,12 @@ public class Helper {
             fragment.setArguments(bundle);
 
         fragmentTransaction.replace(R.id.frameLayout, fragment).addToBackStack(fragment.getClass().getSimpleName()).commit();
+    }
+
+    public static void setupDarkMode(boolean isDarkThemeTurnedOn) {
+        if (isDarkThemeTurnedOn)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 }

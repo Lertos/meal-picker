@@ -2,6 +2,8 @@ package com.lertos.mealpicker.model;
 
 import android.content.Context;
 
+import com.lertos.mealpicker.Helper;
+
 public class DataManager {
 
     public static DataManager instance;
@@ -45,6 +47,9 @@ public class DataManager {
             mealManager = new MealManager();
             fileManager.getMealFile().saveToFile(mealManager);
         }
+
+        //Check if dark theme should be applied
+        Helper.setupDarkMode(settings.useDarkMode());
     }
 
     public FileManager getFile() {

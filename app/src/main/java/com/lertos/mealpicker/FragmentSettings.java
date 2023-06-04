@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -121,10 +120,7 @@ public class FragmentSettings extends Fragment {
         switchDarkMode.setOnClickListener(btnView -> {
             DataManager.getInstance().getSettings().setUseDarkMode(switchDarkMode.isChecked());
 
-            if (switchDarkMode.isChecked())
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            else
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            Helper.setupDarkMode(switchDarkMode.isChecked());
 
             //This is to tell the main activity to reload the settings page since the activity restarts after switching themes; yuck!
             DataManager.getInstance().setChangedDayNightTheme(true);
