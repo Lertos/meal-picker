@@ -116,26 +116,31 @@
             android:paddingHorizontal="50dp">
 
             <Button
+                android:id="@+id/btnResetTimeToMake"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Reset Tags - Time To Make" />
 
             <Button
+                android:id="@+id/btnResetDifficulty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Reset Tags - Difficulty" />
 
             <Button
+                android:id="@+id/btnResetMealTypes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Reset Tags - Meal Type" />
 
             <Button
+                android:id="@+id/btnResetOthers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Reset Tags - Other" />
 
             <Button
+                android:id="@+id/btnDeleteMeals"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Delete All Meals" />
