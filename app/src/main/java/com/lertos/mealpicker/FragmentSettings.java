@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
@@ -24,6 +26,11 @@ public class FragmentSettings extends Fragment {
     private SwitchMaterial switchDarkMode;
     private SwitchMaterial switchCloseKeyboardOnAdd;
     private SwitchMaterial switchResetFieldsOnAdd;
+    private Button btnResetTimeToMake;
+    private Button btnResetDifficulty;
+    private Button btnResetMealTypes;
+    private Button btnResetOthers;
+    private Button btnDeleteMeals;
 
     public FragmentSettings() {
     }
@@ -43,6 +50,12 @@ public class FragmentSettings extends Fragment {
         switchDarkMode = view.findViewById(R.id.switchUseDarkMode);
         switchCloseKeyboardOnAdd = view.findViewById(R.id.switchCloseKeyboardOnAdd);
         switchResetFieldsOnAdd = view.findViewById(R.id.switchResetFieldsOnAdd);
+
+        btnResetTimeToMake = view.findViewById(R.id.btnResetTimeToMake);
+        btnResetDifficulty = view.findViewById(R.id.btnResetDifficulty);
+        btnResetMealTypes = view.findViewById(R.id.btnResetMealTypes);
+        btnResetOthers = view.findViewById(R.id.btnResetOthers);
+        btnDeleteMeals = view.findViewById(R.id.btnDeleteMeals);
 
         //Setup default/configured starting states
         addTimeFormatListValues();
@@ -69,6 +82,7 @@ public class FragmentSettings extends Fragment {
         setupButtonDarkMode();
         setupButtonCloseKeyboardOnAdd();
         setupButtonResetFieldsOnAdd();
+        setupTagResetButtons();
 
         return view;
     }
@@ -126,6 +140,33 @@ public class FragmentSettings extends Fragment {
     private void setupButtonResetFieldsOnAdd() {
         switchResetFieldsOnAdd.setOnClickListener(btnView -> {
             DataManager.getInstance().getSettings().setResetFieldsAfterMealCreation(switchResetFieldsOnAdd.isChecked());
+        });
+    }
+
+    private void setupTagResetButtons() {
+        btnResetTimeToMake.setOnClickListener(btnView -> {
+            DataManager.getInstance().getTags().addTimeToMakeDefaults();
+            Toast.makeText(this.getContext(), "Successfully reset tags for - Time to Make", Toast.LENGTH_SHORT).show();
+        });
+
+        btnResetDifficulty.setOnClickListener(btnView -> {
+            DataManager.getInstance().getTags().addDifficultyDefaults();
+            Toast.makeText(this.getContext(), "Successfully reset tags for - Difficulty", Toast.LENGTH_SHORT).show();
+        });
+
+        btnResetMealTypes.setOnClickListener(btnView -> {
+            DataManager.getInstance().getTags().addMealTypeDefaults();
+            Toast.makeText(this.getContext(), "Successfully reset tags for - Meal Types", Toast.LENGTH_SHORT).show();
+        });
+
+        btnResetOthers.setOnClickListener(btnView -> {
+            DataManager.getInstance().getTags().addOtherDefaults();
+            Toast.makeText(this.getContext(), "Successfully reset tags for - Others", Toast.LENGTH_SHORT).show();
+        });
+
+        btnDeleteMeals.setOnClickListener(btnView -> {
+            DataManager.getInstance().getMeals().removeAllMeals();
+            Toast.makeText(this.getContext(), "Successfully deleted all meals", Toast.LENGTH_SHORT).show();
         });
     }
 }

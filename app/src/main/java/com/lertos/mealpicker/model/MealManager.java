@@ -85,4 +85,9 @@ public class MealManager implements Serializable {
         return filteredList;
     }
 
+    public void removeAllMeals() {
+        mealList.clear();
+        DataManager.getInstance().saveMeals();
+    }
+
 }

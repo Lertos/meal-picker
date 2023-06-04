@@ -30,32 +30,48 @@ public class TagManager implements Serializable {
         addOtherDefaults();
     }
 
-    private void addTimeToMakeDefaults() {
+    public void addTimeToMakeDefaults() {
+        tagsTimeToMake.clear();
+
         tagsTimeToMake.add("Instant");
         tagsTimeToMake.add("Short");
         tagsTimeToMake.add("Medium");
         tagsTimeToMake.add("Long");
         tagsTimeToMake.add("Very Long");
+
+        DataManager.getInstance().saveTags();
     }
 
-    private void addDifficultyDefaults() {
+    public void addDifficultyDefaults() {
+        tagsDifficulty.clear();
+
         tagsDifficulty.add("Easy");
         tagsDifficulty.add("Normal");
         tagsDifficulty.add("Hard");
+
+        DataManager.getInstance().saveTags();
     }
 
-    private void addMealTypeDefaults() {
+    public void addMealTypeDefaults() {
+        tagsMealType.clear();
+
         tagsMealType.add("Breakfast");
         tagsMealType.add("Lunch");
         tagsMealType.add("Supper");
         tagsMealType.add("Snack");
+
+        DataManager.getInstance().saveTags();
     }
 
-    private void addOtherDefaults() {
+    public void addOtherDefaults() {
+        tagsOther.clear();
+
         tagsOther.add("Chicken");
         tagsOther.add("Beef");
         tagsOther.add("Veggies");
         tagsOther.add("Treat");
+
+        DataManager.getInstance().saveTags();
     }
 
     public ArrayList<String> getTagsTimeToMake() {
