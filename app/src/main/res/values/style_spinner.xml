@@ -6,5 +6,7 @@
         <item name="android:paddingHorizontal">4dp</item>
         <item name="android:paddingVertical">4dp</item>
         <item name="android:minHeight">26dp</item>
+        <item name="android:popupTheme">@style/Widget.AppTheme.PopupOverlay</item>
     </style>
+
 </resources>
