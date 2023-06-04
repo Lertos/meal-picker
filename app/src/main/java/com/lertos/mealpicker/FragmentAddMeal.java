@@ -175,6 +175,8 @@ public class FragmentAddMeal extends Fragment {
             existingMeal.setTagMealType(spinnerMealType.getSelectedItem().toString());
             existingMeal.setOtherTags(getOtherTagList());
 
+            DataManager.getInstance().saveMeals();
+
             Toast.makeText(this.getContext(), "Your meal has been updated", Toast.LENGTH_SHORT).show();
         });
     }

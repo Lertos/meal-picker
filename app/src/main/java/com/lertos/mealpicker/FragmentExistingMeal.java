@@ -75,6 +75,9 @@ public class FragmentExistingMeal extends Fragment {
         view.findViewById(R.id.ibBtnDelete).setOnClickListener(btn -> {
             //Delete the meal then go back to the search page
             DataManager.getInstance().getMeals().getMeals().remove(mealIndex);
+            //Save the file
+            DataManager.getInstance().saveMeals();
+            //After deletion, return them to the search page
             Helper.replaceFragment(this.getActivity(), new FragmentSearchMeal(), null);
         });
 

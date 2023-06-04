@@ -26,17 +26,8 @@ public class MealManager implements Serializable {
                 return false;
         }
         mealList.add(newMeal);
+        DataManager.getInstance().saveMeals();
 
-        return true;
-    }
-
-    public boolean removeMeal(String title) {
-        for (Meal meal : mealList) {
-            if (meal.getTitle().equalsIgnoreCase(title)) {
-                mealList.remove(meal);
-                return false;
-            }
-        }
         return true;
     }
 

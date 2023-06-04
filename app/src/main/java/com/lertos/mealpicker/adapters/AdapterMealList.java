@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.lertos.mealpicker.FragmentExistingMeal;
 import com.lertos.mealpicker.Helper;
 import com.lertos.mealpicker.R;
+import com.lertos.mealpicker.model.DataManager;
 import com.lertos.mealpicker.model.Meal;
 
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class AdapterMealList extends RecyclerView.Adapter<AdapterMealList.ViewHo
 
         holder.ibBtnDelete.setOnClickListener(view -> {
             mealList.remove(holder.getAdapterPosition());
+            DataManager.getInstance().saveMeals();
             notifyDataSetChanged();
         });
 
