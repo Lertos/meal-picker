@@ -1,13 +1,16 @@
 package com.lertos.mealpicker.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lertos.mealpicker.R;
@@ -80,21 +83,38 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
         });
 
         holder.ibBtnDelete.setOnClickListener(view -> {
-            //TODO: Need to ask them for a new tag; for now use the zero index although this errors when tag IS the zero index
             //Need to make sure the list has more than one element or there will be a null value for the meals that have this tag
-            if (tagList.size() > 1) {
-                //Need to update the tag globally for all meals that has this attached
-                DataManager.getInstance().updateTag(listType, holder.getAdapterPosition(), 0);
-            } else {
+            if (tagList.size() <= 1) {
                 Toast.makeText(view.getContext(), "A tag list cannot have less than 1 element", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            tagList.remove(holder.getAdapterPosition());
-            DataManager.getInstance().saveTags();
+            Context context = holder.itemView.getContext();
+            String tagName = holder.etTagName.getEditableText().toString();
 
-            currentActivePos = -1;
-            notifyDataSetChanged();
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_selectable_list_item, tagList);
+
+            //Create an alert dialog to let them choose another tag to replace the current tag with
+            new AlertDialog.Builder(context)
+                    .setTitle("Choose a tag to replace '" + tagName + "' with in any meals containing the tag")
+                    .setNegativeButton("Cancel", (dialog, pickedIndex) -> dialog.dismiss())
+                    .setAdapter(arrayAdapter, (dialog, pickedIndex) -> {
+                        //If they picked the same tag they are deleting, don't let that happen
+                        if (holder.getAdapterPosition() == pickedIndex) {
+                            Toast.makeText(view.getContext(), "You can't pick the same tag being deleted", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        //Update the old tag with the new tag
+                        DataManager.getInstance().updateTag(listType, holder.getAdapterPosition(), pickedIndex);
+
+                        tagList.remove(holder.getAdapterPosition());
+                        DataManager.getInstance().saveTags();
+
+                        currentActivePos = -1;
+                        notifyDataSetChanged();
+
+                        dialog.dismiss();
+                    }).show();
         });
     }
 
