@@ -63,6 +63,18 @@ public class DataManager {
         return mealManager;
     }
 
+    public void saveSettings() {
+        fileManager.getSettingsFile().saveToFile(settings);
+    }
+
+    public void saveTags() {
+        fileManager.getTagFile().saveToFile(tagManager);
+    }
+
+    public void saveMeals() {
+        fileManager.getMealFile().saveToFile(mealManager);
+    }
+
     public boolean hasChangedDayNightTheme() {
         return changedDayNightTheme;
     }
