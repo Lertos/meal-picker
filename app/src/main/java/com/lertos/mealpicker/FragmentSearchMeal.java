@@ -79,7 +79,7 @@ public class FragmentSearchMeal extends Fragment {
         addFilterSectionToggleListeners();
         addFilterButtonListener();
 
-        setAdapterMealList(DataManager.getInstance().getMeals().getMeals());
+        setAdapterMealList(DataManager.getInstance().getMeals().getSortedMeals());
 
         return view;
     }

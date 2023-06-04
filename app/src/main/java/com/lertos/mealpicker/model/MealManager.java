@@ -82,6 +82,7 @@ public class MealManager implements Serializable {
             }
             filteredList.add(meal);
         }
+        Collections.sort(filteredList);
         return filteredList;
     }
 
