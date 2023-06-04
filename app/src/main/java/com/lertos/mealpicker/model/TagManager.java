@@ -70,7 +70,7 @@ public class TagManager implements Serializable {
     public boolean addTagToList(List<String> list, String newTag) {
         if (!doesTagExist(list, newTag)) {
             list.add(newTag);
-            DataManager.getInstance().getFile().getTagFile().saveToFile(this);
+            DataManager.getInstance().saveTags();
             return true;
         }
         return false;

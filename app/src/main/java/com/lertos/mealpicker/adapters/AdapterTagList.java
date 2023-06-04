@@ -61,7 +61,7 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
             //Set the tag to the new text
             tagList.set(holder.getAdapterPosition(), holder.etTagName.getEditableText().toString());
             disableTextField(holder);
-            saveFile();
+            DataManager.getInstance().saveTags();
         });
 
         holder.ibBtnCancel.setOnClickListener(view -> {
@@ -73,15 +73,11 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
 
         holder.ibBtnDelete.setOnClickListener(view -> {
             tagList.remove(holder.getAdapterPosition());
-            saveFile();
+            DataManager.getInstance().saveTags();
 
             currentActivePos = -1;
             notifyDataSetChanged();
         });
-    }
-
-    private void saveFile() {
-        DataManager.getInstance().getFile().getTagFile().saveToFile(DataManager.getInstance().getTags());
     }
 
     private void enableTextField(ViewHolder holder) {

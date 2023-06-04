@@ -13,7 +13,7 @@ public class Settings implements Serializable {
     }
 
     private void saveFile() {
-        DataManager.getInstance().getFile().getSettingsFile().saveToFile(this);
+        DataManager.getInstance().saveSettings();
     }
 
     public boolean useMinutesOnly() {
