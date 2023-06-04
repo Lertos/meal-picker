@@ -7,8 +7,7 @@ import java.util.List;
 
 public class TagManager implements Serializable {
 
-    //Tags are essentially just Strings
-    //They are in different lists which serve different purposes. But they're still just Strings.
+    //Tags are essentially just Strings that are in different lists which serve different purposes
     private ArrayList<String> tagsTimeToMake;
     private ArrayList<String> tagsDifficulty;
     private ArrayList<String> tagsMealType;
@@ -21,21 +20,38 @@ public class TagManager implements Serializable {
         tagsOther = new ArrayList<>();
 
         //Providing defaults that most people would use
+        addDefaults();
+    }
+
+    private void addDefaults() {
+        addTimeToMakeDefaults();
+        addDifficultyDefaults();
+        addMealTypeDefaults();
+        addOtherDefaults();
+    }
+
+    private void addTimeToMakeDefaults() {
         tagsTimeToMake.add("Instant");
         tagsTimeToMake.add("Short");
         tagsTimeToMake.add("Medium");
         tagsTimeToMake.add("Long");
         tagsTimeToMake.add("Very Long");
+    }
 
+    private void addDifficultyDefaults() {
         tagsDifficulty.add("Easy");
         tagsDifficulty.add("Normal");
         tagsDifficulty.add("Hard");
+    }
 
+    private void addMealTypeDefaults() {
         tagsMealType.add("Breakfast");
         tagsMealType.add("Lunch");
         tagsMealType.add("Supper");
         tagsMealType.add("Snack");
+    }
 
+    private void addOtherDefaults() {
         tagsOther.add("Chicken");
         tagsOther.add("Beef");
         tagsOther.add("Veggies");
