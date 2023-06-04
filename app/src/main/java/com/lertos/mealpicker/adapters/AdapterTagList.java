@@ -5,12 +5,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lertos.mealpicker.R;
 import com.lertos.mealpicker.model.DataManager;
+import com.lertos.mealpicker.model.EnumListType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +21,12 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
 
     private int currentActivePos = -1;
     private List<String> tagList = new ArrayList<>();
+    private EnumListType listType = null;
     private String previousTagValue;
 
-    public void setDataList(List<String> list) {
+    public void setDataList(List<String> list, EnumListType listType) {
         tagList = list;
+        this.listType = listType;
 
         //Gets rid of the initial empty record
         if (tagList.get(0).isEmpty())
@@ -60,6 +64,10 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
         holder.ibBtnConfirm.setOnClickListener(view -> {
             //Set the tag to the new text
             tagList.set(holder.getAdapterPosition(), holder.etTagName.getEditableText().toString());
+
+            //Need to update the tag globally for all meals that has this attached
+            DataManager.getInstance().updateTag(listType, holder.getAdapterPosition(), holder.getAdapterPosition());
+
             disableTextField(holder);
             DataManager.getInstance().saveTags();
         });
@@ -72,6 +80,16 @@ public class AdapterTagList extends RecyclerView.Adapter<AdapterTagList.ViewHold
         });
 
         holder.ibBtnDelete.setOnClickListener(view -> {
+            //TODO: Need to ask them for a new tag; for now use the zero index although this errors when tag IS the zero index
+            //Need to make sure the list has more than one element or there will be a null value for the meals that have this tag
+            if (tagList.size() > 1) {
+                //Need to update the tag globally for all meals that has this attached
+                DataManager.getInstance().updateTag(listType, holder.getAdapterPosition(), 0);
+            } else {
+                Toast.makeText(view.getContext(), "A tag list cannot have less than 1 element", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             tagList.remove(holder.getAdapterPosition());
             DataManager.getInstance().saveTags();
 

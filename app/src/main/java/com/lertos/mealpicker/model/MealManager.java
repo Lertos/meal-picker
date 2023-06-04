@@ -2,6 +2,7 @@ package com.lertos.mealpicker.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -87,6 +88,73 @@ public class MealManager implements Serializable {
     public void removeAllMeals() {
         mealList.clear();
         DataManager.getInstance().saveMeals();
+    }
+
+    public void updateTagInMeals(EnumListType listType, String oldTag, String newTag) {
+        switch (listType) {
+            //Each single-tag String can be changed in a basic manner
+            case TIME_TO_MAKE:
+                for (Meal meal : mealList) {
+                    if (meal.getTagTimeToMake().equalsIgnoreCase(oldTag))
+                        meal.setTagTimeToMake(newTag);
+                }
+                break;
+            case DIFFICULTY:
+                for (Meal meal : mealList) {
+                    if (meal.getTagDifficulty().equalsIgnoreCase(oldTag))
+                        meal.setTagDifficulty(newTag);
+                }
+                break;
+            case MEAL_TYPE:
+                for (Meal meal : mealList) {
+                    if (meal.getTagMealType().equalsIgnoreCase(oldTag))
+                        meal.setTagMealType(newTag);
+                }
+                break;
+            //The other tag list has a lot more edge cases so we separate the logic into it's own method
+            case OTHER:
+                updateOtherTagsInMeals(oldTag, newTag);
+                break;
+        }
+    }
+
+    private void updateOtherTagsInMeals(String oldTag, String newTag) {
+        String otherTag;
+        int oldTagIndex, newTagIndex;
+
+        for (Meal meal : mealList) {
+            oldTagIndex = -1;
+            newTagIndex = -1;
+
+            for (int i = 0; i < meal.getOtherTags().length; i++) {
+                otherTag = meal.getOtherTags()[i];
+
+                //If both tags were found, then break out as both cases have been dealt with
+                if (oldTagIndex != -1 && newTagIndex != -1) {
+                    break;
+                }
+                //If neither has been found, check for both
+                else {
+                    if (oldTagIndex == -1 && otherTag.equalsIgnoreCase(oldTag))
+                        oldTagIndex = i;
+                    if (newTagIndex == -1 && otherTag.equalsIgnoreCase(newTag))
+                        newTagIndex = i;
+                }
+            }
+
+            //If the old tag was found, we need to handle it
+            if (oldTagIndex != -1) {
+                //If both indices were found, then we remove the old tag only
+                if (oldTagIndex != -1 && newTagIndex != -1) {
+                    List<String> arrList = new ArrayList(Arrays.asList(meal.getOtherTags()));
+                    arrList.remove(oldTagIndex);
+                    meal.setOtherTags(arrList.toArray(new String[0]));
+                }
+                //If only the old tag was found, we update it with the new tag
+                else
+                    meal.getOtherTags()[oldTagIndex] = newTag;
+            }
+        }
     }
 
 }

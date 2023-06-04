@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.tabs.TabLayout;
 import com.lertos.mealpicker.adapters.AdapterTagList;
 import com.lertos.mealpicker.model.DataManager;
+import com.lertos.mealpicker.model.EnumListType;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class FragmentTagManager extends Fragment {
     private EditText etNewTag;
     private ImageButton ibBtnAdd;
     private ArrayList<String> currentTagList;
+    private EnumListType listType;
 
     public FragmentTagManager() {
     }
@@ -61,15 +63,19 @@ public class FragmentTagManager extends Fragment {
                 switch (tab.getPosition()) {
                     case 0:
                         currentTagList = DataManager.getInstance().getTags().getTagsTimeToMake();
+                        listType = EnumListType.TIME_TO_MAKE;
                         break;
                     case 1:
                         currentTagList = DataManager.getInstance().getTags().getTagsDifficulty();
+                        listType = EnumListType.DIFFICULTY;
                         break;
                     case 2:
                         currentTagList = DataManager.getInstance().getTags().getTagsMealType();
+                        listType = EnumListType.MEAL_TYPE;
                         break;
                     case 3:
                         currentTagList = DataManager.getInstance().getTags().getTagsOther();
+                        listType = EnumListType.OTHER;
                         break;
                 }
                 setListToRecyclerView();
@@ -87,7 +93,7 @@ public class FragmentTagManager extends Fragment {
 
     private void setListToRecyclerView() {
         adapterTagList = new AdapterTagList();
-        adapterTagList.setDataList(currentTagList);
+        adapterTagList.setDataList(currentTagList, listType);
 
         recyclerView.setAdapter(adapterTagList);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));

@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.lertos.mealpicker.Helper;
 
+import java.util.List;
+
 public class DataManager {
 
     public static DataManager instance;
@@ -52,10 +54,6 @@ public class DataManager {
         Helper.setupDarkMode(settings.useDarkMode());
     }
 
-    public FileManager getFile() {
-        return fileManager;
-    }
-
     public Settings getSettings() {
         return settings;
     }
@@ -86,5 +84,36 @@ public class DataManager {
 
     public void setChangedDayNightTheme(boolean changedDayNightTheme) {
         this.changedDayNightTheme = changedDayNightTheme;
+    }
+
+    //Removing the tag - meaning meals also need to update their data to replace the deleted tag with a new entry
+    public void updateTag(EnumListType listType, int index, int newIndex) {
+        List<String> tagList = getCorrectTagList(listType);
+
+        //If the list is null or either index is out of bounds, return
+        if (tagList == null || (index < 0 || index >= tagList.size() || newIndex < 0 || newIndex >= tagList.size()))
+            return;
+
+        //Iterate over all meals and update the tag reference
+        String oldTag = tagList.get(index);
+        String newTag = tagList.get(newIndex);
+
+        mealManager.updateTagInMeals(listType, oldTag, newTag);
+
+        saveMeals();
+    }
+
+    private List<String> getCorrectTagList(EnumListType listType) {
+        switch (listType) {
+            case TIME_TO_MAKE:
+                return tagManager.getTagsTimeToMake();
+            case DIFFICULTY:
+                return tagManager.getTagsDifficulty();
+            case MEAL_TYPE:
+                return tagManager.getTagsMealType();
+            case OTHER:
+                return tagManager.getTagsOther();
+        }
+        return null;
     }
 }
